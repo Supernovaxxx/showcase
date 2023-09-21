@@ -1,6 +1,6 @@
 import { CertificatesProps } from "@/types/certificates"
 
-export default function TechStack({ certificates }: CertificatesProps) {
+export default function Skills({ certificates }: CertificatesProps) {
     const skills = [...new Set(certificates
         .map((item) => item.skills)
         .flat())]
