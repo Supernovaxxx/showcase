@@ -21,7 +21,7 @@ export function Certificate({ certificate }: CertificateProps) {
   return (
     <div className='p-4 rounded-xl bg-slate-700 text-white w-72 flex flex-col flex-wrap hover:bg-slate-500' >
       <p className='font-extrabold'>{certificate.title}</p>
-      <p className='font-extralight'>{certificate.issuerName}</p>
+      <p className='font-extralight'>{certificate.issuer.title}</p>
       <p className='font-extralight text-xs'>{certificate.date}</p>
       <p className='font-extralight mt-2'>{certificate.skills}</p>
     </div>
