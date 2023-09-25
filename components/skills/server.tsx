@@ -1,12 +1,12 @@
 import { Skill, ToggleSkill } from "@/types/skills"
-import { SkillBadge } from "./skill-badge"
+import { SkillBadge } from "./client"
 
 interface SkillsProps {
     skills: Skill[]
     toggleSkill: ToggleSkill
 }
 
-export default function Skills({ skills, toggleSkill }: SkillsProps) {
+export function Skills({ skills, toggleSkill }: SkillsProps) {
 
     return (
         <section className='m-8 flex flex-col gap-4 justify-center items-center'>

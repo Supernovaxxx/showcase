@@ -1,7 +1,7 @@
 import { CertificateType, CertificatesProps } from "@/types/certificates"
-import { Certificate } from "./certificate"
+import { Certificate } from "./client"
 
-export default function Certificates({ certificates }: CertificatesProps) {
+export function Certificates({ certificates }: CertificatesProps) {
 
   return (
     <section className='my-4 mx-8 text-slate-800 flex flex-col gap-4 justify-center items-center w-4/5'>
