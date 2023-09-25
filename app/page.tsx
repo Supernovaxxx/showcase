@@ -6,6 +6,7 @@ import Skills from '@/components/skills'
 import { useState } from 'react'
 import { getSkillList } from '@/lib/data-loader'
 import { Skill } from '@/types/skills'
+import { filterCertificatesBySkills } from '@/lib/utils'
 
 export default function Home() {
   let certificates: CertificateType[] = data
@@ -24,7 +25,13 @@ export default function Home() {
   return (
     <div className='w-100 flex flex-col justify-center items-center'>
       <Skills skills={SKILL_LIST} toggleSkill={toggleSkill} />
-      <Certificates certificates={certificates} />
+      <Certificates certificates={
+        filterCertificatesBySkills(
+          certificates,
+          selectedSkills,
+          SKILL_LIST
+        )
+      } />
     </div>
   )
 }
