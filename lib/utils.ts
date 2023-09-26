@@ -1,4 +1,4 @@
-import { CertificateType } from "@/types/certificates"
+import { Certificate } from "@/types/certificates"
 import { Skill } from "@/types/skills"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function filterCertificatesBySkills(certificates: CertificateType[], selectedSkills: Skill[], SKILL_LIST: Skill[]): CertificateType[] {
+export function filterCertificatesBySkills(certificates: Certificate[], selectedSkills: Skill[], SKILL_LIST: Skill[]): Certificate[] {
   // Find all certificates with skills that intersect selected skill list
 
   let skills:Skill[]

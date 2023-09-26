@@ -1,13 +1,13 @@
 'use client'
 import Image from "next/image"
 import { useState } from "react"
-import { CertificateType } from "@/types/certificates"
+import { Certificate } from "@/types/certificates"
 
 interface CertificateProps {
-    certificate: CertificateType
+    certificate: Certificate
 }
 
-export function Certificate({ certificate }: CertificateProps) {
+export function CertificateCard({ certificate }: CertificateProps) {
     const [activeCard, setActiveCard] = useState(false)
     function handleFlip() {
         setActiveCard(!activeCard)

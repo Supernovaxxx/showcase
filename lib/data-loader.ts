@@ -1,8 +1,8 @@
 import data from '@/data/certificates.json'
-import { CertificateType } from "@/types/certificates"
+import { Certificate } from "@/types/certificates"
 
 export function getSkillList() {
-    let certificates: CertificateType[] = data
+    let certificates: Certificate[] = data
 
     return [...new Set(
       certificates

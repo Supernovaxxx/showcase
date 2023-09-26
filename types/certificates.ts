@@ -1,4 +1,4 @@
-export interface CertificateType {
+export interface Certificate {
         title: string,
         date: string, // TODO: define date type (mm/dd/aaaa | mm/aaaa)
         skills: string[],
@@ -11,5 +11,5 @@ export interface CertificateType {
 }
 
 export interface CertificatesProps {
-        certificates: CertificateType[]
+        certificates: Certificate[]
 }

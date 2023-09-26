@@ -1,2 +1,2 @@
 export { Certificates } from './server'
-export { Certificate } from './client'
+export { CertificateCard } from './client'

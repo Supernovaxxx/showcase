@@ -1,5 +1,5 @@
-import { CertificateType, CertificatesProps } from "@/types/certificates"
-import { Certificate } from "./client"
+import { Certificate, CertificatesProps } from "@/types/certificates"
+import { CertificateCard } from "./client"
 
 export function Certificates({ certificates }: CertificatesProps) {
 
@@ -8,8 +8,8 @@ export function Certificates({ certificates }: CertificatesProps) {
       <h2 className='text-xl font-bold text-slate-800'>Certificates</h2>
       <div className='flex gap-y-4 flex-wrap justify-evenly'>
         {
-          certificates.map((item: CertificateType, index) => (
-            <Certificate certificate={item} key={index}/>
+          certificates.map((item: Certificate, index) => (
+            <CertificateCard certificate={item} key={index}/>
           ))
         }
       </div>
