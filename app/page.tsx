@@ -3,34 +3,24 @@ import { Certificate } from '@/types/certificates'
 import data from '@/data/certificates.json'
 import { Certificates } from '@/components/certificates'
 import { Skills } from '@/components/skills'
-import { useState } from 'react'
 import { getSkillList } from '@/lib/data-loader'
-import { Skill } from '@/types/skills'
 import { filterCertificatesBySkills } from '@/lib/utils'
+import { useSkills } from '@/components/skills/useSkills'
 
 export default function Home() {
   let certificates: Certificate[] = data
   const SKILL_LIST = getSkillList()
-
-  const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
-
-  function toggleSkill(skill: Skill): void {
-    if (selectedSkills.includes(skill)) {
-      setSelectedSkills(selectedSkills.filter((selected) => selected !== skill))
-    } else {
-      setSelectedSkills([...selectedSkills, skill])
-    }
-  }
+  const { selectedSkills, toggleSkill } = useSkills()
 
   return (
     <div className='w-100 flex flex-col justify-center items-center'>
-      <Skills skills={SKILL_LIST} toggleSkill={toggleSkill} />
+      <Skills skills={SKILL_LIST} toggleSkill={toggleSkill} selectedSkills={selectedSkills} />
       <Certificates certificates={
-        filterCertificatesBySkills(
+        filterCertificatesBySkills({
           certificates,
           selectedSkills,
           SKILL_LIST
-        )
+        })
       } />
     </div>
   )
