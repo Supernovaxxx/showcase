@@ -1,4 +1,6 @@
 import { Skill, ToggleSkill } from "@/types/core"
+import { Badge } from "../ui/badge"
+
 
 interface SkillProps {
     skill: Skill
@@ -13,10 +15,11 @@ export function SkillBadge({ skill, selectedSkills, toggleSkill }: SkillProps) {
     }
     
     return (
-        <div onClick={() => toggleSkill(skill)}
-        className={`${isActive(skill) ? 'text-white bg-slate-700' : 'text-slate-700 bg-slate-200'} py-1 px-2 sm:p-4 rounded-md cursor-pointer flex items-center hover:bg-slate-500 hover:text-white hover:font-light`}
+        <Badge onClick={() => toggleSkill(skill)}
+            variant={`${isActive(skill) ? 'default' :'outline'}`}
+            className='cursor-pointer hover:opacity-80 hover:scale-105 transition-all ease-in-out duration-100 sm:p-2'
         >
-            <p className='font-extralight text-sm sm:text-base'>{skill}</p>
-        </div>
+            {skill}
+        </Badge>
     )
 }
