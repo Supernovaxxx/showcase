@@ -1,5 +1,4 @@
-import { Certificate } from "@/types/certificates"
-import { Skill } from "@/types/skills"
+import { Certificate, Skill } from "@/types/core"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 

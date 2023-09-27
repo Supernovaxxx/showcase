@@ -1,4 +1,4 @@
-import { Skill, ToggleSkill } from "@/types/skills"
+import { Skill, ToggleSkill } from "@/types/core"
 import { SkillBadge } from "./client"
 
 interface SkillsProps {

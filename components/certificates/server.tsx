@@ -1,4 +1,4 @@
-import { Certificate, CertificatesProps } from "@/types/certificates"
+import { Certificate, CertificatesProps } from "@/types/core"
 import { CertificateCard } from "./client"
 
 export function Certificates({ certificates }: CertificatesProps) {

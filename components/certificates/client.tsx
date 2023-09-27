@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image"
 import { useState } from "react"
-import { Certificate } from "@/types/certificates"
+import { Certificate } from "@/types/core"
 
 interface CertificateProps {
     certificate: Certificate

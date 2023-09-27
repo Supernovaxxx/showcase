@@ -1,5 +1,5 @@
 import data from '@/data/certificates.json'
-import { Certificate } from "@/types/certificates"
+import { Certificate } from "@/types/core"
 
 export function getCertificates() {
   const certificates: Certificate[] = data

@@ -1,4 +1,4 @@
-import { Skill } from "@/types/skills"
+import { Skill } from "@/types/core"
 import { useState } from "react"
 
 export function useSkills() {
