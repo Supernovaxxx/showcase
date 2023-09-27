@@ -1,14 +1,12 @@
 'use client'
-import { Certificate } from '@/types/certificates'
-import data from '@/data/certificates.json'
 import { Certificates } from '@/components/certificates'
 import { Skills } from '@/components/skills'
-import { getSkillList } from '@/lib/data-loader'
+import { getCertificates, getSkillList } from '@/lib/data-loader'
 import { filterCertificatesBySkills } from '@/lib/utils'
 import { useSkills } from '@/components/skills/useSkills'
 
 export default function Home() {
-  let certificates: Certificate[] = data
+  let certificates = getCertificates()
   const SKILL_LIST = getSkillList()
   const { selectedSkills, toggleSkill } = useSkills()
 
