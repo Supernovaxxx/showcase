@@ -14,12 +14,18 @@ export function CertificateCard({ certificate }: CertificateProps) {
     }
 
     return (
-        <div onClick={handleFlip} className={`transition-all duration-1000 preserve-3d ease-in-out cursor-pointer m-2 w-60 sm:w-72 h-52 sm:h-56 ${activeCard ? 'my-rotate-y-180' : ''}`}>
+        <div onClick={handleFlip} className={`transition-all duration-1000 preserve-3d ease-in-out cursor-pointer w-60 sm:w-72 h-52 sm:h-56 ${activeCard ? 'my-rotate-y-180' : ''}`}>
             <div className='relative backface-hidden p-4 rounded-xl bg-slate-700 text-white flex flex-col w-full h-full hover:bg-slate-500 justify-between'>
                 <div className='mt-2'>
-                    <p className='font-extralight text-xs sm:text-sm'>{certificate.date}</p>
-                    <p className='font-extrabold text-lg sm:text-2xl py-1'>{certificate.title}</p>
-                    <p className='font-extralight text-xs sm:text-sm'>By {certificate.issuer.title}</p>
+                    <p className='font-extralight text-xs sm:text-sm flex justify-between'>
+                        {certificate.date}
+                    </p>
+                    <p className='font-extrabold text-lg sm:text-2xl py-1'>
+                        {certificate.title}
+                    </p>
+                    <p className='font-extralight text-xs sm:text-sm'>
+                        By {certificate.issuer.title}
+                    </p>
                 </div>
                 <div className='font-extralight mt-2 py-2 text-xs sm:text-sm justify-self-end'>
                     {

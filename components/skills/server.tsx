@@ -15,7 +15,7 @@ export function Skills({ skills,
     return (
         <section className='m-1 sm:m-8 flex flex-col gap-4 justify-center items-center sm:w-3/4'>
             <h2 className='text-xl font-bold text-slate-800'>Filter by skills</h2>
-            <div className='flex gap-1 sm:gap-x-4 sm:gap-y-2 m-2 flex-wrap justify-evenly '>
+            <div className='flex gap-1 sm:gap-x-4 sm:gap-y-2 m-2 flex-wrap justify-center'>
                 {
                     skills.map((skill: string, index) => (
                         <SkillBadge skill={skill} 
