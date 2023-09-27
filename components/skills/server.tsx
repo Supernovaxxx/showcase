@@ -1,15 +1,15 @@
-import { Skill, ToggleSkill } from "@/types/core"
+import { Skill, ToggleSkill, SkillIsActive } from "@/types/core"
 import { SkillBadge } from "./client"
 
 interface SkillsProps {
     skills: Skill[]
-    selectedSkills: Skill[]
     toggleSkill: ToggleSkill
+    skillIsActive: SkillIsActive
 }
 
-export function Skills({ skills, 
-    selectedSkills,
-    toggleSkill 
+export function Skills({ skills,
+    toggleSkill,
+    skillIsActive
 }: SkillsProps) {
 
     return (
@@ -18,10 +18,10 @@ export function Skills({ skills,
             <div className='flex gap-2 sm:gap-1 sm:gap-x-4 sm:gap-y-2 m-2 flex-wrap justify-center'>
                 {
                     skills.map((skill: string, index) => (
-                        <SkillBadge skill={skill} 
-                        toggleSkill={toggleSkill} 
-                        selectedSkills={selectedSkills}
-                        key={index} />
+                        <SkillBadge skill={skill}
+                            toggleSkill={toggleSkill}
+                            skillIsActive={skillIsActive}
+                            key={index} />
                     ))
                 }
             </div>
