@@ -9,17 +9,11 @@ export function cn(...inputs: ClassValue[]) {
 
 interface FilterCertificatesBySkillsProps {
   certificates: Certificate[]
-  selectedSkills: Skill[]
-  SKILL_LIST: Skill[]
+  skills: Skill[]
 }
 
-export function filterCertificatesBySkills({ certificates, selectedSkills, SKILL_LIST }: FilterCertificatesBySkillsProps): Certificate[] {
+export function filterCertificatesBySkills({ certificates, skills }: FilterCertificatesBySkillsProps): Certificate[] {
   // Find all certificates with skills that intersect selected skill list
-
-  let skills: Skill[]
-  selectedSkills.length
-    ? skills = selectedSkills
-    : skills = SKILL_LIST
 
   return certificates.filter(
     (certicate) => skills.some(

@@ -18,8 +18,7 @@ export default function Home() {
       <Certificates certificates={
         filterCertificatesBySkills({
           certificates,
-          selectedSkills,
-          SKILL_LIST
+          skills: selectedSkills.length ? selectedSkills : SKILL_LIST
         })
       } />
     </div>
