@@ -9,7 +9,7 @@ export default function Home() {
   let certificates = getCertificates()
   const SKILL_LIST = getSkillList()
   const { selectedSkills, toggleSkill, skillIsActive } = useSkills()
-
+  
   return (
     <div className='w-100 flex flex-col justify-center items-center p-8'>
       <h2 className='text-3xl font-bold text-slate-800 '>Certificates</h2>

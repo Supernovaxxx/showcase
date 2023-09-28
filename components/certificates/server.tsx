@@ -6,8 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { convertDateFromIsoToMonthYear } from "@/lib/utils"
+import { Icon } from "../icon"
+import { IconName } from "../icons"
 
 export function Certificates({ certificates }: CertificatesProps) {
 
@@ -31,7 +32,11 @@ interface CertificateProps {
 export function CertificateCard({ certificate }: CertificateProps) {
 
   return (
-    <Card>
+    <Card
+      className='
+        flex flex-col justify-between
+      '
+    >
       <CardHeader>
         <CardDescription>
           {convertDateFromIsoToMonthYear(certificate.date)}
@@ -41,14 +46,26 @@ export function CertificateCard({ certificate }: CertificateProps) {
         </CardTitle>
         <CardDescription>
           {certificate.issuer.title}
+          {' '}
+          <Icon name={certificate.issuer.title as IconName}
+            className='
+              inline
+              w-3 h-3 
+              sm:w-4 sm:h-4 
+            '
+          />
         </CardDescription>
       </CardHeader>
-      <CardFooter>
+      <CardFooter className='flex flex-wrap gap-2'>
         {
           certificate.skills.map((skill) => (
-            <Badge variant="outline">
-              {skill}
-            </Badge>
+            <Icon name={skill as IconName}
+              className='
+                inline pr-1
+                w-7 h-7 
+                sm:w-8 sm:h-8 
+              '
+            />
           ))
         }
       </CardFooter>
