@@ -21,12 +21,20 @@ export function filterCertificatesBySkills({ certificates, skills }: FilterCerti
   )
 }
 
+function isValidDate(date: Date) {
+  return !isNaN(+date)
+}
+
 export function convertDateFromIsoToMonthYear(isoDate: string) { // TODO: define ISO string type
-  return new Date(isoDate).toLocaleDateString(
-    'en-gb',
-    {
-      year: 'numeric',
-      month: 'short'
-    }
-  )
+  var date = new Date(isoDate)
+  if (isValidDate(date)) {
+    return date.toLocaleDateString(
+      'en-gb',
+      {
+        year: 'numeric',
+        month: 'short'
+      }
+    )
+  }
+  return null
 }
