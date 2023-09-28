@@ -1,38 +1,12 @@
 [
     {
-        "title": "Overcoming Procrastination",
-        "date": "02/2023",
-        "skills": [
-            "Overcoming Procrastination"
-        ],
-        "issuer": {
-            "title": "LinkedIn Learning",
-            "logo": ""
-        },
-        "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQHLWhOWEez9jQ/feedshare-document-cover-images_1280/0/1676935982143?e=1696017600&v=beta&t=5jF6aTW0BJd81UbHPpfJllHWOUpM0LEXerO_7pVszc4",
-        "certificateUrl": "https://www.linkedin.com/learning/certificates/0ac6eed4e3b6d2bb28e19419682dfe1f52b45c9001bafc8efa2c3de2faf5143d?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B4gLXTmjQT7q6czmtddNHrg%3D%3D"
-    },
-    {
-        "title": "Designing RESTful APIs",
-        "date": "12/2022",
-        "skills": [
-            "Designing RESTful APIs"
-        ],
-        "issuer": {
-            "title": "LinkedIn Learning",
-            "logo": ""
-        },
-        "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQE0ItITBvXCNg/feedshare-document-cover-images_1280/0/1670184620601?e=1696017600&v=beta&t=yNRurJ64x_aH5SF0tNoi3_K9MRMIptEhqjqEV3EmP-4",
-        "certificateUrl": "https://www.linkedin.com/learning/certificates/2b9559a6485ddd29ddf6b2ac360845ae425215cfa2f47fde17bc2324bb0bea12?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B4gLXTmjQT7q6czmtddNHrg%3D%3D"
-    },
-    {
         "title": "CSS for Programmers",
         "date": "11/2022",
         "skills": [
             "CSS"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQHZkRe1uvsD9w/feedshare-document-cover-images_1280/0/1669028934671?e=1696017600&v=beta&t=mh46wfQUq5kqyjGZATszhKPPzNttJkmRM_LwQFOEPBU",
@@ -42,10 +16,10 @@
         "title": "Learning Next.js",
         "date": "11/2022",
         "skills": [
-            "Next.js"
+            "NextJS"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQF5vMavWnqlSA/feedshare-document-cover-images_1280/0/1669838551108?e=1696017600&v=beta&t=PXaVtchzXSv5Hk3PBOjbHEFVBNIlLVFZpTOYZOy7TiM",
@@ -58,33 +32,20 @@
             "NPM"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQEHB9hEKwlokA/feedshare-document-cover-images_1280/0/1668840085047?e=1696017600&v=beta&t=oegNVsd6i3Ogp3ymdW7OXG69eMGtYDxP_4jgCjhMP4c",
         "certificateUrl": "https://www.linkedin.com/learning/certificates/0552d4c9cc3db3858d8d37397eedcee9431a938a6b13525eb9ef0e0f8246838e?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B4gLXTmjQT7q6czmtddNHrg%3D%3D"
     },
     {
-        "title": "Web Motion: Create a Parallax Effect",
-        "date": "11/2022",
-        "skills": [
-            "Flash Professional"
-        ],
-        "issuer": {
-            "title": "LinkedIn Learning",
-            "logo": ""
-        },
-        "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQG2Gtm6on9j9g/feedshare-document-cover-images_1280/0/1669042608224?e=1696374000&v=beta&t=hPh_AlWxbIfbsjXoYSli6QcXKPBK0snLEKc1IWuLZHE",
-        "certificateUrl": "https://www.linkedin.com/learning/certificates/bf24a049a7ab55be2687914c41839fa32f39ccd0f08569df1f1fd3ac91e51f51"
-    },
-    {
         "title": "Docker Essential Training: 3 Image Creation, Management, and Registry",
         "date": "09/2022",
         "skills": [
-            "Docker Products"
+            "Docker"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/D4D1FAQFbCKkTkT57DQ/feedshare-document-cover-images_1280/0/1662830501370?e=1696374000&v=beta&t=H6wZOUupx-1gd_LDYPvTZmBpYGtK98ZqYst1KHVmVa4",
@@ -94,10 +55,10 @@
         "title": "Learning Docker Compose",
         "date": "09/2022",
         "skills": [
-            "Docker Products"
+            "Docker"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/D4D1FAQF4XFqHzXaLYA/feedshare-document-cover-images_1280/0/1662844315232?e=1696374000&v=beta&t=yYVJXL3DS2hw7tAZornxufbdaZ6UzddHjXynSHef5kI",
@@ -110,7 +71,7 @@
             "Django"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQHFjzJKYmkiiA/feedshare-document-cover-images_1280/0/1660044854318?e=1696374000&v=beta&t=_C-nUGTozlv8YzqSDvu9bSqDcES0zmpFlFyiBTWNC7E",
@@ -120,11 +81,11 @@
         "title": "Build and Deploy Containerized Apps with GitHub Actions",
         "date": "08/2022",
         "skills": [
-            "Containerization",
+            "Docker",
             "GitHub"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQHEmjKho2LcSw/feedshare-document-cover-images_1280/0/1660103634815?e=1696377600&v=beta&t=80VzpBA8XVdYI_6FvLbJRavZw7jJcQKLBl-l1Gh6u-s",
@@ -134,14 +95,130 @@
         "title": "Building RESTful Web APIs with Django",
         "date": "08/2022",
         "skills": [
-            "REST APIs",
             "Django"
         ],
         "issuer": {
-            "title": "LinkedIn Learning",
+            "title": "LinkedIn",
             "logo": ""
         },
         "imageUrl": "https://media.licdn.com/dms/image/C4D1FAQG2YAPUogoeyg/feedshare-document-cover-images_1280/0/1660046136448?e=1696377600&v=beta&t=meBEfjYGxLq-CL8UzmyOfkKxXTNn-RYFQoT88YmnzYM",
         "certificateUrl": "https://www.linkedin.com/learning/certificates/211df2311d11af01ec9c0682c22277434814de6b17d2b3c22f692fd9972e71e1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BU0hYEK%2BGSOuXnPjDPk4NzA%3D%3D"
+    },
+    {
+        "title": "Python Projects",
+        "date": "11/2021",
+        "skills": [
+            "Python"
+        ],
+        "issuer": {
+            "title": "LinkedIn",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://www.linkedin.com/learning/certificates/e80290986144c36e7a02ab7b018666c85009698d7f870c325b933d217cbb8316?trk=backfilled_certificate"
+    },
+    {
+        "title": "8 Things You Must Know in Python",
+        "date": "05/2021",
+        "skills": [
+            "Python"
+        ],
+        "issuer": {
+            "title": "LinkedIn",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://www.linkedin.com/learning/certificates/2d6f29235417f89cf234720956029ab0c2268ef6edc717346fdcf2f2e2c23fc6?trk=backfilled_certificate"
+    },
+    {
+        "title": "Learning MongoDB",
+        "date": "05/2021",
+        "skills": [
+            "MongoDB"
+        ],
+        "issuer": {
+            "title": "LinkedIn",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://www.linkedin.com/learning/certificates/a96fe29a043cc410854845530fb21ac665bdfce2e12d0df863891f525837ba79?trk=backfilled_certificate"
+    },
+    {
+        "title": "Learning GraphQL",
+        "date": "03/2021",
+        "skills": [
+            "GraphQL"
+        ],
+        "issuer": {
+            "title": "LinkedIn",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://www.linkedin.com/learning/certificates/7f0a70867bda60fc6d58b5ec7ecad1f33c767029919bd45b0fede1e35037e9e5?trk=backfilled_certificate"
+    },
+    {
+        "title": "Postman Essential Training",
+        "date": "02/2021",
+        "skills": [
+            "Postman"
+        ],
+        "issuer": {
+            "title": "LinkedIn",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://www.linkedin.com/learning/certificates/94e1eb74cd1405ebef46bbcc7aa53c70cb87abec5ce96ad783218b5d4ebda0d3?trk=backfilled_certificate"
+    },
+    {
+        "title": "Learning React.js",
+        "date": "08/2020",
+        "skills": [
+            "React"
+        ],
+        "issuer": {
+            "title": "LinkedIn",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://www.linkedin.com/learning/certificates/f005acbb40de02bf8ad8dae5f0dcb24288cd18f3a330ab0cf33d0bf24f089410?trk=backfilled_certificate"
+    },
+    {
+        "title": "Learning webpack 4",
+        "date": "07/2020",
+        "skills": [
+            "Webpack"
+        ],
+        "issuer": {
+            "title": "LinkedIn",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://www.linkedin.com/learning/certificates/6ca794b42727fe384ff33fcdeb008fefa0a39b3d0faa05280d4ee2f1a508b06b?trk=backfilled_certificate"
+    },
+    {
+        "title": "Javascript Advanced Certification Course",
+        "date": "05/2020",
+        "skills": [
+            "Javascript"
+        ],
+        "issuer": {
+            "title": "Google",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://drive.google.com/file/d/1Mk7kpuo3JrJEHAABI7aYSSE3TsJeIhx2/view"
+    },
+    {
+        "title": "HTML Advanced Certification Course",
+        "date": "05/2020",
+        "skills": [
+            "HTML"
+        ],
+        "issuer": {
+            "title": "Google",
+            "logo": ""
+        },
+        "imageUrl": "",
+        "certificateUrl": "https://drive.google.com/file/d/1MY84i-7D-rqv2yWLDS4Ggc-eHgYxpF2_/view"
     }
 ]
