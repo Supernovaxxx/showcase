@@ -1,2 +1,1 @@
-export { Skills } from './server'
-export { SkillBadge } from './client'
+export { Skills, SkillBadge } from './server'
