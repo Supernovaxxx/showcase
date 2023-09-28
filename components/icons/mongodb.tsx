@@ -1,4 +1,4 @@
-export function MongoDB({ fill, ...props }: React.SVGProps<SVGSVGElement>) {
+export function MongoDB(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg {...props} width="256px" height="549px" viewBox="0 0 256 549" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
             <g>

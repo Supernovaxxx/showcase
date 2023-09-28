@@ -1,4 +1,4 @@
-export function HTML({ fill, ...props }: React.SVGProps<SVGSVGElement>) {
+export function HTML(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg {...props} width="256px" height="361px" viewBox="0 0 256 361" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
             <g>

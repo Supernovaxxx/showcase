@@ -1,4 +1,4 @@
-export function Google({ fill, ...props }: React.SVGProps<SVGSVGElement>) {
+export function Google(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg {...props} width="256px" height="262px" viewBox="0 0 256 262" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
             <g>

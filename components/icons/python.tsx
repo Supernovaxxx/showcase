@@ -1,4 +1,4 @@
-export function Python({ fill, ...props }: React.SVGProps<SVGSVGElement>) {
+export function Python(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg {...props} width="256px" height="255px" viewBox="0 0 256 255" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
             <defs>
