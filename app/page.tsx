@@ -27,10 +27,10 @@ export default function Home() {
       </h2>
       <Skills skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
       <Certificates certificates={
-        filterCertificatesBySkills({
+        filterCertificatesBySkills(
           certificates,
-          skills: selectedSkills.length ? selectedSkills : SKILL_LIST
-        })
+          selectedSkills.length ? selectedSkills : SKILL_LIST
+        )
       } />
     </div>
   )

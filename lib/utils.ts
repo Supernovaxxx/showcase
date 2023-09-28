@@ -6,12 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-interface FilterCertificatesBySkillsProps {
-  certificates: Certificate[]
-  skills: Skill[]
-}
-
-export function filterCertificatesBySkills({ certificates, skills }: FilterCertificatesBySkillsProps): Certificate[] {
+export function filterCertificatesBySkills(
+  certificates: Certificate[],
+  skills: Skill[],
+): Certificate[] {
   // Find all certificates with skills that intersect selected skill list
 
   return certificates.filter(
