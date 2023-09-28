@@ -37,3 +37,12 @@ const Icons = {
 export default Icons
 
 export type IconName = keyof typeof Icons
+
+export interface IconProps extends React.SVGProps<SVGSVGElement> {
+    name: IconName
+}
+
+export function Icon({ name, ...props }: IconProps) {
+    const Icon = Icons[name]
+    return <Icon {...props} />
+}

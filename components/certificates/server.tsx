@@ -7,8 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { convertDateFromIsoToMonthYear } from "@/lib/utils"
-import { Icon } from "../icon"
-import { IconName } from "../icons"
+import { Icon, IconName } from "@/components/icons"
 
 export function Certificates({ certificates }: CertificatesProps) {
 

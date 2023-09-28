@@ -1,7 +1,6 @@
 import { Skill, ToggleSkill, SkillIsActive } from "@/types/core"
-import { Badge } from "../ui/badge"
-import { Icon } from "../icon"
-import { IconName } from "../icons"
+import { Badge } from "@/components/ui/badge"
+import { Icon, IconName } from "@/components/icons"
 import {
     Tooltip,
     TooltipContent,
