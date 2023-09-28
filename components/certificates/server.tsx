@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { convertDateFromIsoToMonthYear } from "@/lib/utils"
 
 export function Certificates({ certificates }: CertificatesProps) {
 
@@ -33,7 +34,7 @@ export function CertificateCard({ certificate }: CertificateProps) {
     <Card>
       <CardHeader>
         <CardDescription>
-          {certificate.date}
+          {convertDateFromIsoToMonthYear(certificate.date)}
         </CardDescription>
         <CardTitle>
           {certificate.title}

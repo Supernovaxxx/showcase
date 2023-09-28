@@ -20,3 +20,13 @@ export function filterCertificatesBySkills({ certificates, skills }: FilterCerti
     )
   )
 }
+
+export function convertDateFromIsoToMonthYear(isoDate: string) { // TODO: define ISO string type
+  return new Date(isoDate).toLocaleDateString(
+    'en-gb',
+    {
+      year: 'numeric',
+      month: 'short'
+    }
+  )
+}
