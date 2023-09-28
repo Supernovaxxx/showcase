@@ -1,7 +1,6 @@
 export function NextJS({ fill, ...props }: React.SVGProps<SVGSVGElement>) {
     return (
         <svg {...props} width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
-        <title>Next.js</title>
         <defs>
             <circle id="path-1" cx="128" cy="128" r="128"></circle>
             <linearGradient x1="55.6325605%" y1="56.3850422%" x2="83.2279093%" y2="96.0801119%" id="nextjsLinearGradient-3">
