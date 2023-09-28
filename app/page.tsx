@@ -11,8 +11,20 @@ export default function Home() {
   const { selectedSkills, toggleSkill, skillIsActive } = useSkills()
   
   return (
-    <div className='w-100 flex flex-col justify-center items-center p-8'>
-      <h2 className='text-3xl font-bold text-slate-800 '>Certificates</h2>
+    <div 
+      className='
+        flex flex-col justify-center items-center
+        p-8
+        w-100
+      '
+    >
+      <h2
+        className='
+          text-3xl font-bold text-slate-800
+        '
+      >
+        Certificates
+      </h2>
       <Skills skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
       <Certificates certificates={
         filterCertificatesBySkills({

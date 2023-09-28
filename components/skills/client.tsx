@@ -21,15 +21,22 @@ export function SkillBadge({ skill, toggleSkill, skillIsActive }: SkillProps) {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger>
-                    <Badge onClick={() => toggleSkill(skill)}
+                    <Badge
+                        onClick={() => toggleSkill(skill)}
                         variant={`${skillIsActive(skill) ? 'secondary' : 'outline'}`}
                         className='
                             sm:p-3
-                            cursor-pointer transition-all ease-in-out duration-100
+                            cursor-pointer
+                            transition-all ease-in-out duration-100
                             hover:opacity-80 hover:scale-105
                         '
                     >
-                        <Icon name={skill as IconName} className='w-8 h-8 sm:w-12 sm:h-12' />
+                        <Icon
+                            name={skill as IconName}
+                            className='
+                                w-8 h-8 sm:w-12 sm:h-12
+                            '
+                        />
                     </Badge>
                 </TooltipTrigger>
                 <TooltipContent>

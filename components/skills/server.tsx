@@ -13,12 +13,24 @@ export function Skills({ skills,
 }: SkillsProps) {
 
     return (
-        <section className='m-1 sm:m-8 flex flex-col gap-4 justify-center items-center sm:w-3/4'>
-            <h2 className='text-xl font-bold text-slate-800'>Filter by skills</h2>
+        <section
+            className='
+                flex flex-col justify-center items-center gap-4
+                m-1 sm:m-8
+                sm:w-3/4
+            '
+        >
+            <h2
+                className='
+                    text-xl font-bold text-slate-800
+                '
+            >
+                Filter by skills
+            </h2>
             <div  
                 className='
-                    flex flex-wrap justify-center
-                    m-2 gap-2 sm:gap-x-6 sm:gap-y-6
+                    flex flex-wrap justify-center gap-2 sm:gap-x-6 sm:gap-y-6
+                    m-2
                 '
             >
                 {

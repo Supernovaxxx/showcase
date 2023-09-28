@@ -13,8 +13,19 @@ import { IconName } from "../icons"
 export function Certificates({ certificates }: CertificatesProps) {
 
   return (
-    <section className='my-4 mx-2 sm:mx-8 text-slate-800 flex flex-col gap-y-2 sm:gap-4 justify-center items-center w-11/12 sm:w-4/5'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
+    <section
+      className='
+        flex flex-col justify-center items-center gap-y-2 sm:gap-4
+        my-4 mx-2 sm:mx-8
+        w-11/12 sm:w-4/5
+        text-slate-800
+      '
+    >
+      <div
+        className='
+          grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4
+          '
+      >
         {
           certificates.map((item: Certificate, index) => (
             <CertificateCard certificate={item} key={index} />
@@ -50,13 +61,16 @@ export function CertificateCard({ certificate }: CertificateProps) {
           <Icon name={certificate.issuer.title as IconName}
             className='
               inline
-              w-3 h-3 
-              sm:w-4 sm:h-4 
+              w-3 h-3 sm:w-4 sm:h-4 
             '
           />
         </CardDescription>
       </CardHeader>
-      <CardFooter className='flex flex-wrap gap-2'>
+      <CardFooter
+        className='
+          flex flex-wrap gap-2
+        '
+      >
         {
           certificate.skills.map((skill) => (
             <Icon name={skill as IconName}
