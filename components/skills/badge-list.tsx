@@ -15,7 +15,7 @@ export function SkillBadgesList({ skills,
     return (
         <section
             className='
-                flex flex-col justify-center items-center gap-4
+                flex flex-col justify-center items-center gap-1
                 m-1 sm:m-8
                 sm:w-3/4
             '
@@ -29,7 +29,7 @@ export function SkillBadgesList({ skills,
             </h2>
             <div  
                 className='
-                    flex flex-wrap justify-center gap-2 sm:gap-x-6 sm:gap-y-6
+                    flex flex-wrap justify-start gap-2 sm:gap-x-6 sm:gap-y-6
                     m-2
                 '
             >
