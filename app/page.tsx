@@ -1,8 +1,7 @@
 'use client'
 import { Certificates } from '@/components/certificates'
 import { Skills, useSkills } from '@/components/skills'
-import { getCertificates, getSkillList } from '@/lib/data-loader'
-import { filterCertificatesBySkills } from '@/lib/utils'
+import { getCertificates, getSkillList, filterCertificatesBySkills } from '@/lib/data'
 
 export default function Home() {
   let certificates = getCertificates()
