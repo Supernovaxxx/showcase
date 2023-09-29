@@ -1,4 +1,5 @@
-import { Skill, ToggleSkill, SkillIsActive } from "@/types/core"
+import { Skill } from "@/types/core"
+import { ToggleSkill, SkillIsActive } from '@/components/skills'
 import { Badge } from "@/components/ui/badge"
 import { Icon, IconName } from "@/components/icons"
 import {
@@ -8,58 +9,13 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-interface SkillsProps {
-    skills: Skill[]
-    toggleSkill: ToggleSkill
-    skillIsActive: SkillIsActive
-}
-
-export function Skills({ skills,
-    toggleSkill,
-    skillIsActive
-}: SkillsProps) {
-
-    return (
-        <section
-            className='
-                flex flex-col justify-center items-center gap-4
-                m-1 sm:m-8
-                sm:w-3/4
-            '
-        >
-            <h2
-                className='
-                    text-xl font-bold text-slate-800
-                '
-            >
-                Filter by skills
-            </h2>
-            <div  
-                className='
-                    flex flex-wrap justify-center gap-2 sm:gap-x-6 sm:gap-y-6
-                    m-2
-                '
-            >
-                {
-                    skills.map((skill, index) => (
-                        <SkillBadge skill={skill}
-                            toggleSkill={toggleSkill}
-                            skillIsActive={skillIsActive}
-                            key={index} />
-                    ))
-                }
-            </div>
-        </section>
-    )
-}
-
-interface SkillProps {
+interface SkillBadgeProps {
     skill: Skill
     toggleSkill: ToggleSkill
     skillIsActive: SkillIsActive
 }
 
-export function SkillBadge({ skill, toggleSkill, skillIsActive }: SkillProps) {
+export function SkillBadge({ skill, toggleSkill, skillIsActive }: SkillBadgeProps) {
 
     return (
         <TooltipProvider>

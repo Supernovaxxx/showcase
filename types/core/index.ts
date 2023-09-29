@@ -1,2 +1,2 @@
-export type { Certificate, CertificatesProps } from './certificates'
-export type { Skill, ToggleSkill, SkillIsActive } from './skills'
+export type { Certificate } from './certificates'
+export type { Skill } from './skills'

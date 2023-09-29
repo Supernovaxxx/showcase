@@ -1,6 +1,6 @@
 'use client'
-import { Certificates } from '@/components/certificates'
-import { Skills, useSkills } from '@/components/skills'
+import { CertificatesPanel } from '@/components/certificates'
+import { SkillBadgesList, useSkills } from '@/components/skills'
 import { getCertificates, getSkillList, filterCertificatesBySkills } from '@/lib/data'
 
 export default function Home() {
@@ -23,8 +23,8 @@ export default function Home() {
       >
         Certificates
       </h2>
-      <Skills skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
-      <Certificates certificates={
+      <SkillBadgesList skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
+      <CertificatesPanel certificates={
         filterCertificatesBySkills(
           certificates,
           selectedSkills.length ? selectedSkills : SKILL_LIST

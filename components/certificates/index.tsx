@@ -1,1 +1,2 @@
-export { Certificates, CertificateCard } from './server'
+export { CertificatesPanel } from './panel'
+export { CertificateCard } from './card'

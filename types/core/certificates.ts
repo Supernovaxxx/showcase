@@ -9,7 +9,3 @@ export interface Certificate {
         imageUrl: string,
         certificateUrl: string
 }
-
-export interface CertificatesProps {
-        certificates: Certificate[]
-}
