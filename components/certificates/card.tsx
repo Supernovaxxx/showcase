@@ -21,7 +21,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
           flex flex-col justify-between
         '
     >
-      <CardHeader>
+      <CardHeader className='min-h-[9.25rem]'>
         <CardDescription>
           {convertDateFromIsoToMonthYear(certificate.date)}
         </CardDescription>
@@ -48,9 +48,8 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
           certificate.skills.map((skill) => (
             <Icon name={skill as IconName}
               className='
-                  inline pr-1
-                  w-7 h-7 
-                  sm:w-8 sm:h-8 
+                  inline
+                  w-8 h-8 
                 '
             />
           ))

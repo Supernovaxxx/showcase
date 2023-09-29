@@ -29,7 +29,7 @@ export function SkillBadgesList({ skills,
             </h2>
             <div  
                 className='
-                    flex flex-wrap justify-start gap-2 sm:gap-x-6 sm:gap-y-6
+                    flex flex-wrap justify-start gap-2 sm:gap-2
                     m-2
                 '
             >
