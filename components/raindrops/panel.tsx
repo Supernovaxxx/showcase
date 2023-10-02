@@ -6,6 +6,7 @@ import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -18,6 +19,8 @@ interface Raindrop {
     link: string
     created: string
     tags: string[]
+    type: string
+    cover: string
 }
 
 interface Raindrops {
@@ -46,12 +49,22 @@ export function RaindropsPanel() {
 
     if (raindrops)
         return (
-            <section>
-                <div className="flex w-11/12 sm:w-4/5 gap-2 justify-end items-center">
+            <section
+                className='
+                    flex flex-col items-center 
+                    w-11/12 sm:w-4/5
+                '
+            >
+                <div
+                    className='
+                        flex justify-end items-center gap-2 
+                        w-11/12 sm:w-3/5
+                    '
+                >
                     <Button onClick={() => changePage('previous')} variant='outline' size='icon'
                         className={
                             page === 0
-                                ? 'cursor-default hover:bg-inherit'
+                                ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
                                 : ''
                         }
                     >
@@ -63,25 +76,28 @@ export function RaindropsPanel() {
                 </div>
                 <div
                     className='
-        flex flex-col justify-center items-start gap-y-2 sm:gap-4
-        my-4 mx-2 sm:mx-8
-        w-11/12 sm:w-4/5
-        text-slate-800
-      '
+                        grid grid-cols-1 md:grid-cols-2 gap-4
+                        my-4 mx-2 sm:mx-8
+                        w-11/12 sm:w-3/5
+                        text-slate-800
+                    '
                 >
                     {
                         raindrops.items.map((item, index) => {
                             return (
-                                <Card key={index}>
-                                    <CardHeader>
-                                        <CardDescription>{convertDateFromIsoToDayMonthYear(item.created)}</CardDescription>
-                                        <CardTitle className="hover:opacity-80"><a href={item.link} target="_blank">{item.title}</a></CardTitle>
+                                <Card key={index} className='max-w-sm'>
+                                    <CardHeader className="min-h-[9.125rem]">
+                                        <CardTitle><a className="hover:opacity-80 hover:underline" href={item.link} target="_blank">{item.title}</a> · <span className="text-xs capitalize">{item.type}</span></CardTitle>
+                                        <CardDescription>Pinned on <strong>{convertDateFromIsoToDayMonthYear(item.created)}</strong></CardDescription>
                                     </CardHeader>
-                                    <CardContent className='flex gap-2'>
+                                    <CardContent className="flex justify-center">
+                                        <img src={item.cover} className="w-64 h-32 rounded" />
+                                    </CardContent>
+                                    <CardFooter className='flex gap-2'>
                                         {
                                             item.tags.map((tag, index) => <Badge key={index}>{tag}</Badge>)
                                         }
-                                    </CardContent>
+                                    </CardFooter>
                                 </Card>
                             )
                         }
