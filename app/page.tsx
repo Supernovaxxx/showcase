@@ -1,12 +1,11 @@
-import CertificatesSection from '@/components/sections/certificates'
-import LearnlogSection from '@/components/sections/learnlog'
+import { CertificationSection, LearnlogSection } from '@/components/site/sections'
 
 export default function Home() {
 
   return (
     <main>
       <LearnlogSection />
-      <CertificatesSection />
+      <CertificationSection />
     </main>
   )
 }

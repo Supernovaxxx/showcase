@@ -1,20 +1,11 @@
 'use client'
 import { useEffect, useState } from "react"
 import { getRaindropsList } from "@/lib/sdk"
-import { convertDateFromIsoToDayMonthYear } from "@/lib/utils"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ReferenceCard } from "@/components/core/references"
 
-interface Raindrop {
+export interface Raindrop {
     title: string
     link: string
     created: string
@@ -23,14 +14,14 @@ interface Raindrop {
     cover: string
 }
 
-interface Raindrops {
+export interface Raindrops {
     result: boolean
     items: Raindrop[]
     count: number
     collectionId: number
 }
 
-export function RaindropsPanel() {
+export function ReferencesPanel() {
     var [page, setPage] = useState<number>(0)
     const [raindrops, setRaindrops] = useState<Raindrops>()
 
@@ -85,20 +76,7 @@ export function RaindropsPanel() {
                     {
                         raindrops.items.map((item, index) => {
                             return (
-                                <Card key={index} className='max-w-sm'>
-                                    <CardHeader className="min-h-[9.125rem]">
-                                        <CardTitle><a className="hover:opacity-80 hover:underline" href={item.link} target="_blank">{item.title}</a> · <span className="text-xs capitalize">{item.type}</span></CardTitle>
-                                        <CardDescription>Pinned on <strong>{convertDateFromIsoToDayMonthYear(item.created)}</strong></CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="flex justify-center">
-                                        <img src={item.cover} className="w-64 h-32 rounded" />
-                                    </CardContent>
-                                    <CardFooter className='flex gap-2'>
-                                        {
-                                            item.tags.map((tag, index) => <Badge key={index}>{tag}</Badge>)
-                                        }
-                                    </CardFooter>
-                                </Card>
+                                <ReferenceCard item={item} index={index} />
                             )
                         }
                         )

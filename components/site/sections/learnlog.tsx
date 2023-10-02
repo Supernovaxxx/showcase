@@ -1,6 +1,6 @@
-import { RaindropsPanel } from '@/components/raindrops/panel'
+import { ReferencesPanel } from '@/components/core/references/'
 
-export default function LearnlogSection() {
+export function LearnlogSection() {
     
     return (
         <div
@@ -17,7 +17,7 @@ export default function LearnlogSection() {
         >
           Learnlog
         </h2>
-        <RaindropsPanel />
+        <ReferencesPanel />
       </div>
     )
 }
