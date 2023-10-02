@@ -1,7 +1,7 @@
 import { Skill } from "@/types/core"
-import { ToggleSkill, SkillIsActive } from '@/components/skills'
+import { ToggleSkill, SkillIsActive } from '@/components/core/skills'
 import { Badge } from "@/components/ui/badge"
-import { Icon, IconName } from "@/components/icons"
+import { Icon, IconName } from "@/components/site/icons"
 import {
     Tooltip,
     TooltipContent,

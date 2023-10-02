@@ -1,5 +1,5 @@
 import { Skill } from "@/types/core"
-import { SkillBadge, ToggleSkill, SkillIsActive } from '@/components/skills'
+import { SkillBadge, ToggleSkill, SkillIsActive } from '@/components/core/skills'
 
 interface SkillBadgesListProps {
     skills: Skill[]
