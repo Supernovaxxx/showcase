@@ -45,8 +45,9 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
           '
       >
         {
-          certificate.skills.map((skill) => (
+          certificate.skills.map((skill, index) => (
             <Icon name={skill as IconName}
+              key={index}
               className='
                   inline
                   w-8 h-8 
