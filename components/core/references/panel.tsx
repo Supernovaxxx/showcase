@@ -1,9 +1,10 @@
 'use client'
-import { useEffect, useState } from "react"
-import { getRaindropsList } from "@/lib/sdk"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ReferenceCard } from "@/components/core/references"
+import { useRaindrops } from "@/hooks/useRaindrops"
+import { Input } from "@/components/ui/input"
 
 export interface Raindrop {
     title: string
@@ -12,6 +13,7 @@ export interface Raindrop {
     tags: string[]
     type: string
     cover: string
+    domain: string
 }
 
 export interface Raindrops {
@@ -23,22 +25,21 @@ export interface Raindrops {
 
 export function ReferencesPanel() {
     var [page, setPage] = useState<number>(0)
-    const [raindrops, setRaindrops] = useState<Raindrops>()
+    var [search, setSearch] = useState<string>('')
 
-    useEffect(() => {
-        async function fetchData() {
-            const raindrops: Raindrops = await getRaindropsList(page)
-            setRaindrops(raindrops)
-        }
-        fetchData()
-    }, [page])
+    const references = useRaindrops(page, search)
 
     function changePage(direction: string) {
         if (direction === 'previous' && page > 0) setPage((prevPage) => prevPage - 1)
         if (direction === 'next') setPage((prevPage) => prevPage + 1)
     }
 
-    if (raindrops)
+    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setPage(0)
+        setSearch(e.target.value)
+    }
+
+    if (references)
         return (
             <section
                 className='
@@ -50,8 +51,10 @@ export function ReferencesPanel() {
                     className='
                         flex justify-end items-center gap-2 
                         w-11/12 sm:w-3/5
+                        mt-2
                     '
                 >
+                    <Input placeholder="Search" className="w-2/5 sm:w-1/3" onChange={(e) => handleInputChange(e)}/>
                     <Button onClick={() => changePage('previous')} variant='outline' size='icon'
                         className={
                             page === 0
@@ -74,9 +77,9 @@ export function ReferencesPanel() {
                     '
                 >
                     {
-                        raindrops.items.map((item, index) => {
+                        references.items.map((item, index) => {
                             return (
-                                <ReferenceCard item={item} index={index} />
+                                <ReferenceCard item={item} key={index} />
                             )
                         }
                         )

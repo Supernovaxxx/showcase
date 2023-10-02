@@ -1,17 +1,17 @@
 import axios, { AxiosError } from "axios"
 
 export const raindropApi = axios.create({
-    baseURL: process.env.RAINDROP_API_BASE_URL,
+    baseURL: process.env.NEXT_PUBLIC_RAINDROP_API_BASE_URL,
 })
 
-export async function getRaindropsList() {
+export async function getRaindropsList(page: number, search?:string) {
     const config = {
         headers: {
-            'Authorization': `Bearer ${process.env.RAINDROP_TOKEN}`,
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_RAINDROP_TOKEN}`,
         }
     }
 
-    const list = await raindropApi.get(`raindrops/${process.env.RAINDROP_COLLECTION_ID}/`, config)
+    const list = await raindropApi.get(`raindrops/${process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID}?&perpage=4&page=${page}&search=${search}`, config)
         .then(response => {
             return response.data
         })
