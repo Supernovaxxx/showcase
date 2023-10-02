@@ -22,3 +22,18 @@ export function convertDateFromIsoToMonthYear(isoDate: string) {
   }
   return null
 }
+
+export function convertDateFromIsoToDayMonthYear(isoDate: string) { 
+  var date = new Date(isoDate)
+  if (isValidDate(date)) {
+    return date.toLocaleDateString(
+      'en-gb',
+      {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit'
+      }
+    )
+  }
+  return null
+}
