@@ -12,15 +12,15 @@ import { Badge } from "@/components/ui/badge"
 
 interface ReferenceCardProps {
     item: Raindrop
-    index: number
 }
 
-export function ReferenceCard({ item, index }: ReferenceCardProps ) {
+export function ReferenceCard({ item }: ReferenceCardProps) {
     return (
-        <Card key={index} className='max-w-sm'>
+        <Card className='max-w-sm'>
             <CardHeader className="min-h-[9.125rem]">
-                <CardTitle><a className="hover:opacity-80 hover:underline" href={item.link} target="_blank">{item.title}</a> · <span className="text-xs capitalize">{item.type}</span></CardTitle>
+                <CardTitle><a className="hover:opacity-80 hover:underline" href={item.link} target="_blank">{item.title}</a>  <span className="text-xs capitalize">{item.type}</span></CardTitle>
                 <CardDescription>Pinned on <strong>{convertDateFromIsoToDayMonthYear(item.created)}</strong></CardDescription>
+                <CardDescription className="text-sm small-caps"><a className="hover:opacity-80 hover:underline" href={`http://${item.domain}`} target="_blank">{item.domain}</a></CardDescription>
             </CardHeader>
             <CardContent className="flex justify-center">
                 <img src={item.cover} className="w-64 h-32 rounded" />
