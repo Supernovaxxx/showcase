@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ReferenceCard } from "@/components/core/references"
 import { useRaindrops } from "@/hooks/useRaindrops"
 import { Input } from "@/components/ui/input"
+import { ReferencesSkeleton } from "./skeleton"
 
 export interface Raindrop {
     title: string
@@ -27,7 +28,7 @@ export function ReferencesPanel() {
     var [page, setPage] = useState<number>(0)
     var [search, setSearch] = useState<string>('')
 
-    const { data } = useRaindrops(page, search)
+    const { data, isLoading, isError } = useRaindrops(page, search)
     const references = data
 
     function changePage(direction: string) {
@@ -40,7 +41,6 @@ export function ReferencesPanel() {
         setSearch(e.target.value)
     }
 
-    if (references)
     return (
         <section
             className='
@@ -78,12 +78,17 @@ export function ReferencesPanel() {
                     '
             >
                 {
-                    references.items.map((item, index) => {
-                        return (
-                            <ReferenceCard item={item} key={index} />
-                        )
-                    }
-                    )
+                    isLoading
+                        ? <ReferencesSkeleton />
+                        : isError
+                            ? <p className="w-full text-lg col-span-full text-center pt-8">An error occured. Please try again.</p>
+                            : references !== undefined && references.items.length > 0
+                                ? references?.items.map((item, index) => {
+                                    return (
+                                        <ReferenceCard item={item} key={index} />
+                                    )
+                                })
+                                : <p className="w-full text-lg col-span-full text-center pt-8">No references found for "<strong>{search}</strong>". Please try again.</p>
                 }
             </div>
         </section>
