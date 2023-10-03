@@ -16,7 +16,7 @@ interface ReferenceCardProps {
 
 export function ReferenceCard({ item }: ReferenceCardProps) {
     return (
-        <Card className='max-w-sm'>
+        <Card className='max-w-xs break-words'>
             <CardHeader className="min-h-[9.125rem]">
                 <CardTitle><a className="hover:opacity-80 hover:underline" href={item.link} target="_blank">{item.title}</a>  <span className="text-xs capitalize">{item.type}</span></CardTitle>
                 <CardDescription>Pinned on <strong>{convertDateFromIsoToDayMonthYear(item.created)}</strong></CardDescription>
