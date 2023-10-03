@@ -27,7 +27,8 @@ export function ReferencesPanel() {
     var [page, setPage] = useState<number>(0)
     var [search, setSearch] = useState<string>('')
 
-    const references = useRaindrops(page, search)
+    const { data } = useRaindrops(page, search)
+    const references = data
 
     function changePage(direction: string) {
         if (direction === 'previous' && page > 0) setPage((prevPage) => prevPage - 1)
@@ -40,51 +41,51 @@ export function ReferencesPanel() {
     }
 
     if (references)
-        return (
-            <section
-                className='
+    return (
+        <section
+            className='
                     flex flex-col items-center 
                     w-11/12 sm:w-4/5
                 '
+        >
+            <div
+                className='
+                    flex justify-end gap-2 
+                    w-11/12 sm:w-3/5
+                    mt-2
+                    '
             >
-                <div
-                    className='
-                        flex justify-end items-center gap-2 
-                        w-11/12 sm:w-3/5
-                        mt-2
-                    '
+                <Input placeholder="Search" className="w-2/5 sm:w-1/3" onChange={(e) => handleInputChange(e)} />
+                <Button onClick={() => changePage('previous')} variant='outline' size='icon'
+                    className={
+                        page === 0
+                            ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
+                            : ''
+                    }
                 >
-                    <Input placeholder="Search" className="w-2/5 sm:w-1/3" onChange={(e) => handleInputChange(e)}/>
-                    <Button onClick={() => changePage('previous')} variant='outline' size='icon'
-                        className={
-                            page === 0
-                                ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
-                                : ''
-                        }
-                    >
-                        <ChevronLeft className="h-4 w-4" />
-                    </Button>
-                    <Button onClick={() => changePage('next')} variant='outline' size='icon'>
-                        <ChevronRight className="h-4 w-4" />
-                    </Button>
-                </div>
-                <div
-                    className='
-                        grid grid-cols-1 md:grid-cols-2 gap-4
-                        my-4 mx-2 sm:mx-8
-                        w-11/12 sm:w-3/5
-                        text-slate-800
+                    <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button onClick={() => changePage('next')} variant='outline' size='icon'>
+                    <ChevronRight className="h-4 w-4" />
+                </Button>
+            </div>
+            <div
+                className='
+                    grid grid-cols-1 md:grid-cols-2 gap-4
+                    my-4 mx-2 sm:mx-8
+                    w-11/12 sm:w-3/5
+                    text-slate-800
                     '
-                >
-                    {
-                        references.items.map((item, index) => {
-                            return (
-                                <ReferenceCard item={item} key={index} />
-                            )
-                        }
+            >
+                {
+                    references.items.map((item, index) => {
+                        return (
+                            <ReferenceCard item={item} key={index} />
                         )
                     }
-                </div>
-            </section>
-        )
+                    )
+                }
+            </div>
+        </section>
+    )
 }
