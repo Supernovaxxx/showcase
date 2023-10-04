@@ -1,13 +1,14 @@
-import { Certificate } from "@/types/core/certificates"
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { convertDateFromIsoToMonthYear } from "@/lib/utils"
-import { Icon, IconName } from "@/components/site/icons"
+} from '@/components/ui/card'
+import { Icon, IconName } from '@/components/site/icons'
+import { convertDateFromIsoToMonthYear } from '@/lib/utils'
+import { Certificate } from '@/types/core/certificates'
+
 
 interface CertificateCardProps {
   certificate: Certificate

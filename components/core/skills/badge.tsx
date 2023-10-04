@@ -1,13 +1,15 @@
-import { Skill } from "@/types/core"
-import { ToggleSkill, SkillIsActive } from '@/components/core/skills'
-import { Badge } from "@/components/ui/badge"
-import { Icon, IconName } from "@/components/site/icons"
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from '@/components/ui/tooltip'
+import { Badge } from '@/components/ui/badge'
+import { Icon, IconName } from '@/components/site/icons'
+import { Skill } from '@/types/core'
+
+import { ToggleSkill, SkillIsActive } from '@/components/core/skills'
+
 
 interface SkillBadgeProps {
     skill: Skill

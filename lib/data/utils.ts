@@ -1,4 +1,5 @@
-import { Certificate, Skill } from "@/types/core"
+import { Certificate, Skill } from '@/types/core'
+
 
 export function filterCertificatesBySkills(
     certificates: Certificate[],

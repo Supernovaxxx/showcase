@@ -1,30 +1,18 @@
 'use client'
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { ReferenceCard } from "@/components/core/references"
-import { useRaindrops } from "@/hooks/useRaindrops"
-import { Input } from "@/components/ui/input"
-import { ReferencesSkeleton } from "./skeleton"
+import { useState } from 'react'
 
-export interface Raindrop {
-    title: string
-    link: string
-    created: string
-    tags: string[]
-    type: string
-    cover: string
-    domain: string
-}
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { LucideIcons } from '@/components/site/icons'
+import { useRaindrops } from '@/hooks/useRaindrops'
 
-export interface Raindrops {
-    result: boolean
-    items: Raindrop[]
-    count: number
-    collectionId: number
-}
+import { ReferenceCard } from '@/components/core/references'
+import { ReferencesSkeleton } from '@/components/core/references/skeleton'
+
 
 export function ReferencesPanel() {
+    const { ChevronLeft, ChevronRight } = LucideIcons
+
     var [page, setPage] = useState<number>(0)
     var [search, setSearch] = useState<string>('')
 
@@ -55,7 +43,7 @@ export function ReferencesPanel() {
                     mt-2
                     '
             >
-                <Input placeholder="Search" className="w-2/5 sm:w-1/3" onChange={(e) => handleInputChange(e)} />
+                <Input placeholder='Search' className='w-2/5 sm:w-1/3' onChange={(e) => handleInputChange(e)} />
                 <Button onClick={() => changePage('previous')} variant='outline' size='icon'
                     className={
                         page === 0
@@ -63,10 +51,10 @@ export function ReferencesPanel() {
                             : ''
                     }
                 >
-                    <ChevronLeft className="h-4 w-4" />
+                    <ChevronLeft className='h-4 w-4' />
                 </Button>
                 <Button onClick={() => changePage('next')} variant='outline' size='icon'>
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className='h-4 w-4' />
                 </Button>
             </div>
             <div
@@ -81,14 +69,14 @@ export function ReferencesPanel() {
                     isLoading
                         ? <ReferencesSkeleton />
                         : isError
-                            ? <p className="w-full text-lg col-span-full text-center pt-8">An error occured. Please try again.</p>
+                            ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
                             : references !== undefined && references.items.length > 0
                                 ? references?.items.map((item, index) => {
                                     return (
                                         <ReferenceCard item={item} key={index} />
                                     )
                                 })
-                                : <p className="w-full text-lg col-span-full text-center pt-8">No references found for "<strong>{search}</strong>". Please try again.</p>
+                                : <p className='w-full text-lg col-span-full text-center pt-8'>No references found for '<strong>{search}</strong>'. Please try again.</p>
                 }
             </div>
         </section>
