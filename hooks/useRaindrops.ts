@@ -1,13 +1,14 @@
 'use client'
-import { Raindrops } from "@/components/core/references/panel"
-import { raindropApi } from "@/lib/sdk"
-import axios, { AxiosError } from "axios"
-import { useQuery } from "react-query"
+import { useQuery } from 'react-query'
+
+import { axios, AxiosError, raindropApi } from '@/lib/sdk'
+import { RaindropApiResponse } from '@/types/data/raindrops'
+
 
 export function useRaindrops(page: number, search?:string) {
 
     async function getList() {
-        const { data } = await raindropApi<Raindrops>(
+        const { data } = await raindropApi<RaindropApiResponse>(
             `raindrops/${process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID}?&perpage=4&page=${page}&search=${search}`,
         ).catch(function (error) {
             if (axios.isAxiosError(error)) {
@@ -20,7 +21,7 @@ export function useRaindrops(page: number, search?:string) {
         return data
     }
 
-    return useQuery<Raindrops, AxiosError>({
+    return useQuery<RaindropApiResponse, AxiosError>({
         queryKey:[page, search],
         queryFn: () => getList(),
         staleTime: 6000000,

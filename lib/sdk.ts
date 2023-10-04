@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios, { AxiosError } from 'axios'
+
 
 export const raindropApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_RAINDROP_API_BASE_URL,
@@ -6,3 +7,5 @@ export const raindropApi = axios.create({
         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_RAINDROP_TOKEN}`,
     }
 })
+
+export { axios, AxiosError }

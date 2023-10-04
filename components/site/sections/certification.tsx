@@ -1,7 +1,9 @@
 'use client'
 import { CertificatesPanel } from '@/components/core/certificates'
-import { SkillBadgesList, useSkills } from '@/components/core/skills'
-import { getCertificates, getSkillList, filterCertificatesBySkills } from '@/lib/data'
+import { SkillBadgesList } from '@/components/core/skills'
+import { useSkills } from '@/hooks/useSkills'
+import { filterCertificatesBySkills, getCertificates, getSkillList } from '@/lib/data'
+
 
 export function CertificationSection() {
     let certificates = getCertificates()

@@ -1,7 +1,8 @@
-import { Certificate } from "@/types/core"
-import { CertificateCard } from "@/components/core/certificates"
+import { CertificateCard } from '@/components/core/certificates'
+import { Certificate } from '@/types/core'
 
-export interface CertificatesPanelProps {
+
+interface CertificatesPanelProps {
   certificates: Certificate[]
 }
 

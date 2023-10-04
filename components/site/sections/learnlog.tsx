@@ -1,4 +1,5 @@
-import { ReferencesPanel } from '@/components/core/references/'
+import { ReferencesPanel } from '@/components/core/references'
+
 
 export function LearnlogSection() {
     

@@ -1,5 +1,6 @@
 'use client'
-import { QueryClientProvider, QueryClient } from "react-query"
+import { QueryClient, QueryClientProvider } from 'react-query'
+
 
 export function Providers({children}: React.PropsWithChildren) {
     const queryClient = new QueryClient()
