@@ -17,6 +17,7 @@ import { Python } from '@/components/site/icons/python'
 import { React } from '@/components/site/icons/react'
 import { Webpack } from '@/components/site/icons/webpack'
 
+export { Favicon } from '@/components/site/icons/favicon'
 
 const Icons = {
     CSS,

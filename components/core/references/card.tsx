@@ -7,6 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card'
+import { Favicon } from '@/components/site/icons'
 import { convertDateFromIsoToDayMonthYear } from '@/lib/utils'
 import { Reference } from '@/types/core'
 
@@ -16,21 +17,38 @@ interface ReferenceCardProps {
 }
 
 export function ReferenceCard({ item }: ReferenceCardProps) {
+
     return (
-        <Card className='max-w-xs break-words'>
-            <CardHeader className='min-h-[9.125rem]'>
-                <CardTitle><a className='hover:opacity-80 hover:underline' href={item.link} target='_blank'>{item.title}</a>  <span className='text-xs capitalize'>{item.type}</span></CardTitle>
-                <CardDescription>Pinned on <strong>{convertDateFromIsoToDayMonthYear(item.created)}</strong></CardDescription>
-                <CardDescription className='text-sm small-caps'><a className='hover:opacity-80 hover:underline' href={`http://${item.domain}`} target='_blank'>{item.domain}</a></CardDescription>
-            </CardHeader>
-            <CardContent className='flex justify-center'>
-                <img src={item.cover} className='w-64 h-32 rounded' />
-            </CardContent>
-            <CardFooter className='flex gap-2'>
-                {
-                    item.tags.map((tag, index) => <Badge key={index}>{tag}</Badge>)
-                }
-            </CardFooter>
+        <Card
+            className='
+                max-w-xs
+                break-words 
+                shadow-inner 
+                hover:shadow-md hover:drop-shadow-md hover:scale-105 
+                ease-in-out duration-200
+                '
+        >
+            <a className='hover:opacity-90' href={item.link} target='_blank'>
+                <CardHeader className='min-h-[9.125rem]'>
+                    <CardTitle>{item.title}</CardTitle>
+                    <CardDescription>
+                        Pinned on {' '}
+                        <strong>{convertDateFromIsoToDayMonthYear(item.created)}</strong>
+                    </CardDescription>
+                    <CardDescription className='text-sm small-caps'>
+                        {item.domain} {' '}
+                        <Favicon domain={item.domain} />
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className='flex justify-center aspect-video'>
+                    <img src={item.cover} className='w-full h-full rounded' />
+                </CardContent>
+                <CardFooter className='flex gap-2'>
+                    {
+                        item.tags.map((tag, index) => <Badge key={index}>{tag}</Badge>)
+                    }
+                </CardFooter>
+            </a>
         </Card>
     )
 }
