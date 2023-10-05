@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -15,11 +15,25 @@ export function ReferencesPanel() {
 
     var [page, setPage] = useState<number>(0)
     var [search, setSearch] = useState<string>('')
+    const [itemsPerPage, setItemsPerPage] = useState(4)
 
-    const { data, isLoading, isError } = useRaindrops(page, search)
+    useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth >= 1024) {
+                setItemsPerPage(6)
+            } else {
+                setItemsPerPage(4)
+            }
+        }
+
+        window.addEventListener('resize', handleResize)
+        handleResize()
+    }, [])
+
+    const { data, isLoading, isError } = useRaindrops(page, itemsPerPage, search)
     const references = data
 
-    const nextPageData = useRaindrops(page+1, search)
+    const nextPageData = useRaindrops(page+1, itemsPerPage, search)
     const nextPage = nextPageData.data?.items.length
 
     function changePage(direction: string) {
@@ -67,9 +81,9 @@ export function ReferencesPanel() {
             </div>
             <div
                 className='
-                    grid grid-cols-1 md:grid-cols-2 gap-4
+                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4
                     my-4 mx-2 sm:mx-8
-                    w-11/12 sm:w-3/5
+                    w-11/12 sm:w-4/5 lg:w-11/12
                     text-slate-800
                     '
             >

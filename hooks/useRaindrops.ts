@@ -7,13 +7,14 @@ import { RaindropApiResponse } from '@/types/data/raindrops'
 
 export function useRaindrops(
     page: number,
+    itemsPerPage: number,
     search?: string,
     collectionID: string = `${process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID}`,
 ): UseQueryResult<RaindropApiResponse, AxiosError<unknown, any>> {
 
     async function getList() {
         const { data } = await raindropApi<RaindropApiResponse>(
-            `raindrops/${collectionID}?&perpage=4&page=${page}&search=${search}`,
+            `raindrops/${collectionID}?&perpage=${itemsPerPage}&page=${page}&search=${search}`,
         ).catch(function (error) {
             if (axios.isAxiosError(error)) {
                 console.log(error.message)
@@ -26,7 +27,7 @@ export function useRaindrops(
     }
 
     return useQuery<RaindropApiResponse, AxiosError>({
-        queryKey: [page, search, collectionID],
+        queryKey: [page, itemsPerPage, search, collectionID],
         queryFn: () => getList(),
         staleTime: 6000000,
     })
