@@ -20,7 +20,7 @@ export function ReferencesSkeleton() {
 
 function SingleReferenceSkeleton() {
     return (
-        <Card className='max-w-sm'>
+        <Card className='max-w-sm animate-pulse rounded-md bg-slate-50'>
             <CardHeader className='min-h-[9.125rem]'>
                 <Skeleton className='h-6 w-3/4 rounded' />
                 <Skeleton className='h-6 w-4/5 rounded' />
