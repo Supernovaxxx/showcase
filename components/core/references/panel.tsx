@@ -19,9 +19,12 @@ export function ReferencesPanel() {
     const { data, isLoading, isError } = useRaindrops(page, search)
     const references = data
 
+    const nextPageData = useRaindrops(page+1, search)
+    const nextPage = nextPageData.data?.items.length
+
     function changePage(direction: string) {
         if (direction === 'previous' && page > 0) setPage((prevPage) => prevPage - 1)
-        if (direction === 'next') setPage((prevPage) => prevPage + 1)
+        if (direction === 'next' && nextPage) setPage((prevPage) => prevPage + 1)
     }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -53,7 +56,12 @@ export function ReferencesPanel() {
                 >
                     <ChevronLeft className='h-4 w-4' />
                 </Button>
-                <Button onClick={() => changePage('next')} variant='outline' size='icon'>
+                <Button onClick={() => changePage('next')} variant='outline' size='icon'
+                    className={
+                        !nextPage
+                        ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
+                        : ''
+                    }>
                     <ChevronRight className='h-4 w-4' />
                 </Button>
             </div>
