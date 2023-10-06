@@ -6,16 +6,16 @@ import {
 } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 
+export function ReferencesSkeleton({ perPage }: { perPage: number }) {
+  const skeletons = Array.from({ length: perPage })
 
-export function ReferencesSkeleton() {
-    return (
-        <>
-            <SingleReferenceSkeleton />
-            <SingleReferenceSkeleton />
-            <SingleReferenceSkeleton />
-            <SingleReferenceSkeleton />
-        </>
-    )
+  return (
+    <>
+      {skeletons.map((item, index) => (
+        <SingleReferenceSkeleton key={index} />
+      ))}
+    </>
+  )
 }
 
 function SingleReferenceSkeleton() {
