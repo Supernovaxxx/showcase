@@ -35,7 +35,7 @@ export function ReferenceCard({ item }: ReferenceCardProps) {
                         Pinned on {' '}
                         <strong>{convertDateFromIsoToDayMonthYear(item.created)}</strong>
                     </CardDescription>
-                    <CardDescription className='text-sm small-caps'>
+                    <CardDescription className='text-sm [font-variant-caps:small-caps]'>
                         {item.domain} {' '}
                         <Favicon domain={item.domain} />
                     </CardDescription>
