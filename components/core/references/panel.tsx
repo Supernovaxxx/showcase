@@ -13,10 +13,15 @@ import { ReferencesSkeleton } from '@/components/core/references/skeleton'
 export function ReferencesPanel() {
     const { ChevronLeft, ChevronRight } = LucideIcons
 
-    const [page, setPage] = useState<number>(0)
     const [search, setSearch] = useState<string>('')
     const [itemsPerPage, setItemsPerPage] = useState<number>(0)
     const [isBigScreen, setIsBigScreen] = useState<boolean>(window.innerWidth >= 1024)
+    const { data:references, isLoading, isError, isFirstPage, isLastPage, changePage, setPage } = useRaindrops(itemsPerPage, search)
+
+    window.addEventListener('resize', () => {
+        const isBigScreen = window.innerWidth >= 1024
+        setIsBigScreen(isBigScreen)
+    })
 
     useEffect(() => {
         function handleResize() {
@@ -28,21 +33,6 @@ export function ReferencesPanel() {
         }
         handleResize()
     }, [isBigScreen])
-
-    window.addEventListener('resize', () => {
-        const isBigScreen = window.innerWidth >= 1024
-        setIsBigScreen(isBigScreen)
-    })
-
-    const { data, isLoading, isError, totalOfPages, isLastPage } = useRaindrops(page, itemsPerPage, search)
-    const references = data
-
-    const isFirstPage = page === 0
-
-    function changePage(direction: string) {
-        if (direction === 'previous' && !isFirstPage) setPage((prevPage) => prevPage - 1)
-        if (direction === 'next' && !isLastPage) setPage((prevPage) => prevPage + 1)
-    }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         setPage(0)
