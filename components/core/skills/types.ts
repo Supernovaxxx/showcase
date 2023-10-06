@@ -1,4 +1,4 @@
-import { Skill } from '@/types/core/skills'
+import { Skill } from '@/types/core'
 
 
 export type ToggleSkill = (item: string) => void

@@ -1,2 +1,3 @@
-export { ReferenceCard } from '@/components/core/references/card'
-export { ReferencesPanel } from '@/components/core/references/panel'
+export { ReferenceCard } from './card'
+export { ReferencesPanel } from './panel'
+export { ReferencesSkeleton } from './skeleton'
