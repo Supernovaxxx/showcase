@@ -7,7 +7,7 @@ import { Raindrop, RaindropApiResponse } from '@/types/data/raindrops'
 
 function getCollectionRaindropsData(
     collectionID: string,
-    // search?: string,
+    search?: string,
     page: number = 0,
     itemsPerPage: number = 50,
 ) {
@@ -15,8 +15,8 @@ function getCollectionRaindropsData(
         const { data } = await raindropApi<RaindropApiResponse>(
             `raindrops/${collectionID}?` +
             `&perpage=${itemsPerPage}` +
-            `&page=${page}`
-            // `&search=${search}`
+            `&page=${page}` +
+            `&search=${search}`
         ).catch(function (error: any) {
             if (axios.isAxiosError(error)) {
                 console.log(error.message)
@@ -27,9 +27,8 @@ function getCollectionRaindropsData(
         })
         return data
     }
-
     return useQuery<RaindropApiResponse, AxiosError>({
-        queryKey: [page, itemsPerPage, collectionID],
+        queryKey: [page, itemsPerPage, collectionID, search],
         queryFn: () => getList(),
         staleTime: 6000000,
     })
@@ -40,16 +39,17 @@ export function useReferences(
 ) {
     const [page, setPage] = useState<number>(0)
     const [total, setTotal] = useState<number>(0)
+    const [searchString, setSearchString] = useState<string>('')
 
-
-    const { data, ...response } = getCollectionRaindropsData(
+    const { data, isLoading, ...response } = getCollectionRaindropsData(
         process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID!,
-        // search,
+        searchString,
         page,
     )
 
-    const [references, setReferences] = useState<Raindrop[]>(data?.items || [])
-
+    const [references, setReferences] = useState<Raindrop[]>(
+        data !== undefined ? data.items : []
+    )
     useEffect(() => {
         setTotal(data?.count || 0)
 
@@ -61,24 +61,32 @@ export function useReferences(
         }
     }, [data])
 
+    useEffect(() => {
+        if (search === undefined || search === '') {
+            setSearchString('')
+        } else {
+            setSearchString(search)
+        }
+        setPage(0)
+        setReferences([])
+    },[search])
+
     function loadMoreReferences() {
         setPage((prevPage: number) => prevPage + 1)
     }
 
-    return { references, total, loadMoreReferences }
+    return { references, isLoading, total, loadMoreReferences, ...response }
 }
 
 
 export function usePaginetedReferences(
     _index: number = 0,
-    _perPage: number = 10,
     search?: string,
-    hook: 
 ) {
-    const { references, total, loadMoreReferences } = useReferences(search)
+    const { references, isLoading, total, loadMoreReferences, ...response } = useReferences(search)
 
     const [index, setIndex] = useState<number>(_index)
-    const [perPage, setPerPage] = useState<number>(_perPage)
+    const [perPage, setPerPage] = useState<number>(0)
     const firstIndexNextPage = index + perPage
     const [pageData, setPageData] = useState<Raindrop[]>(references.slice(index, firstIndexNextPage))
 
@@ -87,9 +95,12 @@ export function usePaginetedReferences(
     const isFirstPage = page === 1
     const isLastPage = firstIndexNextPage >= total
 
-
     useEffect(() => {
-        if (references?.length <= firstIndexNextPage) {
+        if (
+            !isLoading
+            && references?.length <= firstIndexNextPage
+            && !isLastPage
+        ) {
             loadMoreReferences()
         }
 
@@ -98,11 +109,13 @@ export function usePaginetedReferences(
 
 
     function nextPage() {
-        setIndex((prevIndex: number) => prevIndex + perPage)
+        if (!isLastPage)
+            setIndex((prevIndex: number) => prevIndex + perPage)
     }
 
     function previousPage() {
-        setIndex((prevIndex: number) => prevIndex - perPage)
+        if (!isFirstPage)
+            setIndex((prevIndex: number) => prevIndex - perPage)
     }
 
     function changePage(direction: string) {
@@ -123,5 +136,7 @@ export function usePaginetedReferences(
         changePage,
         nextPage,
         previousPage,
+        isLoading,
+        ...response
     }
 }

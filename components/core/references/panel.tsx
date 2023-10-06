@@ -13,7 +13,7 @@ export function ReferencesPanel() {
     const { ChevronLeft, ChevronRight } = LucideIcons
 
     const [search, setSearch] = useState<string>('')
-    // const [isBigScreen, setIsBigScreen] = useState<boolean>(window.innerWidth >= 1024)
+    const [isBigScreen, setIsBigScreen] = useState<boolean>(window.innerWidth >= 1024)
     const {
         pageData,
         index,
@@ -27,23 +27,25 @@ export function ReferencesPanel() {
         changePage,
         nextPage,
         previousPage,
-    } = usePaginetedReferences(0, 17, search)
+        isLoading,
+        isError
+    } = usePaginetedReferences(0, search)
 
-    // window.addEventListener('resize', () => {
-    //     const isBigScreen = window.innerWidth >= 1024
-    //     setIsBigScreen(isBigScreen)
-    // })
+    window.addEventListener('resize', () => {
+        const isBigScreen = window.innerWidth >= 1024
+        setIsBigScreen(isBigScreen)
+    })
 
-    // useEffect(() => {
-    //     function handleResize() {
-    //         if (isBigScreen) {
-    //             setPerPage(6)
-    //         } else {
-    //             setPerPage(4)
-    //         }
-    //     }
-    //     handleResize()
-    // }, [isBigScreen])
+    useEffect(() => {
+        function handleResize() {
+            if (isBigScreen) {
+                setPerPage(6)
+            } else {
+                setPerPage(4)
+            }
+        }
+        handleResize()
+    }, [isBigScreen])
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         setIndex(0)
@@ -92,6 +94,11 @@ export function ReferencesPanel() {
                     '
             >
                 {
+                    isLoading
+                    ? <ReferencesSkeleton perPage={perPage} />
+                    : isError
+                        ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
+                        :
                     pageData.length > 0
                         ? pageData.map((item, index) => {
                             return (
@@ -104,20 +111,6 @@ export function ReferencesPanel() {
                             </p>
                         )
                 }
-
-                {/* {
-                    isLoading
-                        ? <ReferencesSkeleton />
-                        : isError
-                            ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
-                            : references !== undefined && references.items.length > 0
-                                ? references?.items.map((item, index) => {
-                                    return (
-                                        <ReferenceCard item={item} key={index} />
-                                    )
-                                })
-                                : <p className='w-full text-lg col-span-full text-center pt-8'>No references found for '<strong>{search}</strong>'. Please try again.</p>
-                } */}
             </div>
         </section>
     )
