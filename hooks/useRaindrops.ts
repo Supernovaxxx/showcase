@@ -1,5 +1,5 @@
 'use client'
-import { useQuery, UseQueryResult } from 'react-query'
+import { useQuery } from 'react-query'
 
 import { axios, AxiosError, raindropApi } from '@/lib/sdk'
 import { RaindropApiResponse } from '@/types/data/raindrops'
@@ -10,7 +10,7 @@ export function useRaindrops(
     itemsPerPage: number,
     search?: string,
     collectionID: string = `${process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID}`,
-): UseQueryResult<RaindropApiResponse, AxiosError<unknown, any>> {
+) {
 
     async function getList() {
         const { data } = await raindropApi<RaindropApiResponse>(
@@ -26,9 +26,15 @@ export function useRaindrops(
         return data
     }
 
-    return useQuery<RaindropApiResponse, AxiosError>({
+    const { data, ...response } = useQuery<RaindropApiResponse, AxiosError>({
         queryKey: [page, itemsPerPage, search, collectionID],
         queryFn: () => getList(),
         staleTime: 6000000,
     })
+
+    const count = data?.count
+    const totalOfPages = Math.ceil(count! / itemsPerPage)
+    const isLastPage = page + 1 === totalOfPages ? true : false
+
+    return { data, totalOfPages, isLastPage, ...response }
 }

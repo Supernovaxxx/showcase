@@ -13,32 +13,35 @@ import { ReferencesSkeleton } from '@/components/core/references/skeleton'
 export function ReferencesPanel() {
     const { ChevronLeft, ChevronRight } = LucideIcons
 
-    var [page, setPage] = useState<number>(0)
-    var [search, setSearch] = useState<string>('')
-    const [itemsPerPage, setItemsPerPage] = useState(4)
+    const [page, setPage] = useState<number>(0)
+    const [search, setSearch] = useState<string>('')
+    const [itemsPerPage, setItemsPerPage] = useState<number>(0)
+    const [isBigScreen, setIsBigScreen] = useState<boolean>(window.innerWidth >= 1024)
 
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth >= 1024) {
+            if (isBigScreen) {
                 setItemsPerPage(6)
             } else {
                 setItemsPerPage(4)
             }
         }
-
-        window.addEventListener('resize', handleResize)
         handleResize()
-    }, [])
+    }, [isBigScreen])
 
-    const { data, isLoading, isError } = useRaindrops(page, itemsPerPage, search)
+    window.addEventListener('resize', () => {
+        const isBigScreen = window.innerWidth >= 1024
+        setIsBigScreen(isBigScreen)
+    })
+
+    const { data, isLoading, isError, totalOfPages, isLastPage } = useRaindrops(page, itemsPerPage, search)
     const references = data
 
-    const nextPageData = useRaindrops(page+1, itemsPerPage, search)
-    const nextPage = nextPageData.data?.items.length
+    const isFirstPage = page === 0
 
     function changePage(direction: string) {
-        if (direction === 'previous' && page > 0) setPage((prevPage) => prevPage - 1)
-        if (direction === 'next' && nextPage) setPage((prevPage) => prevPage + 1)
+        if (direction === 'previous' && !isFirstPage) setPage((prevPage) => prevPage - 1)
+        if (direction === 'next' && !isLastPage) setPage((prevPage) => prevPage + 1)
     }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -63,7 +66,7 @@ export function ReferencesPanel() {
                 <Input placeholder='Search' className='w-2/5 sm:w-1/3' onChange={(e) => handleInputChange(e)} />
                 <Button onClick={() => changePage('previous')} variant='outline' size='icon'
                     className={
-                        page === 0
+                        isFirstPage
                             ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
                             : ''
                     }
@@ -72,9 +75,9 @@ export function ReferencesPanel() {
                 </Button>
                 <Button onClick={() => changePage('next')} variant='outline' size='icon'
                     className={
-                        !nextPage
-                        ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
-                        : ''
+                        isLastPage
+                            ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
+                            : ''
                     }>
                     <ChevronRight className='h-4 w-4' />
                 </Button>
