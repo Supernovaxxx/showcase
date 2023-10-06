@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LucideIcons } from '@/components/site/icons'
-import { useRaindrops } from '@/hooks/useRaindrops'
+import { usePaginetedReferences } from '@/hooks/useRaindrops'
 
 import { ReferenceCard, ReferencesSkeleton } from './index'
 
@@ -13,28 +13,40 @@ export function ReferencesPanel() {
     const { ChevronLeft, ChevronRight } = LucideIcons
 
     const [search, setSearch] = useState<string>('')
-    const [itemsPerPage, setItemsPerPage] = useState<number>(0)
-    const [isBigScreen, setIsBigScreen] = useState<boolean>(window.innerWidth >= 1024)
-    const { data:references, isLoading, isError, isFirstPage, isLastPage, changePage, setPage } = useRaindrops(itemsPerPage, search)
+    // const [isBigScreen, setIsBigScreen] = useState<boolean>(window.innerWidth >= 1024)
+    const {
+        pageData,
+        index,
+        setIndex,
+        firstIndexNextPage,
+        perPage,
+        setPerPage,
+        page,
+        isFirstPage,
+        isLastPage,
+        changePage,
+        nextPage,
+        previousPage,
+    } = usePaginetedReferences(0, 17, search)
 
-    window.addEventListener('resize', () => {
-        const isBigScreen = window.innerWidth >= 1024
-        setIsBigScreen(isBigScreen)
-    })
+    // window.addEventListener('resize', () => {
+    //     const isBigScreen = window.innerWidth >= 1024
+    //     setIsBigScreen(isBigScreen)
+    // })
 
-    useEffect(() => {
-        function handleResize() {
-            if (isBigScreen) {
-                setItemsPerPage(6)
-            } else {
-                setItemsPerPage(4)
-            }
-        }
-        handleResize()
-    }, [isBigScreen])
+    // useEffect(() => {
+    //     function handleResize() {
+    //         if (isBigScreen) {
+    //             setPerPage(6)
+    //         } else {
+    //             setPerPage(4)
+    //         }
+    //     }
+    //     handleResize()
+    // }, [isBigScreen])
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setPage(0)
+        setIndex(0)
         setSearch(e.target.value)
     }
 
@@ -80,6 +92,20 @@ export function ReferencesPanel() {
                     '
             >
                 {
+                    pageData.length > 0
+                        ? pageData.map((item, index) => {
+                            return (
+                                <ReferenceCard item={item} key={index} />
+                            )
+                        })
+                        : (
+                            <p className='w-full text-lg col-span-full text-center pt-8'>
+                                No references found for '<strong>{search}</strong>'. Please try again.
+                            </p>
+                        )
+                }
+
+                {/* {
                     isLoading
                         ? <ReferencesSkeleton />
                         : isError
@@ -91,7 +117,7 @@ export function ReferencesPanel() {
                                     )
                                 })
                                 : <p className='w-full text-lg col-span-full text-center pt-8'>No references found for '<strong>{search}</strong>'. Please try again.</p>
-                }
+                } */}
             </div>
         </section>
     )

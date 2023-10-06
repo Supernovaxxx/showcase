@@ -1,54 +1,127 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 
 import { axios, AxiosError, raindropApi } from '@/lib/sdk'
-import { RaindropApiResponse } from '@/types/data/raindrops'
+import { Raindrop, RaindropApiResponse } from '@/types/data/raindrops'
 
-
-export function useRaindrops(
-    itemsPerPage: number,
-    search?: string,
-    collectionID: string = `${process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID}`,
+function getCollectionRaindropsData(
+    collectionID: string,
+    // search?: string,
+    page: number = 0,
+    itemsPerPage: number = 50,
 ) {
-
-    const [page, setPage] = useState<number>(0)
-    const { data, ...response } = getRaindropsCollectionData()
-    const isFirstPage = page === 0
-    const isLastPage = checkIfLastPage()
-
-    function getRaindropsCollectionData() {
-        async function getList() {
-            const { data } = await raindropApi<RaindropApiResponse>(
-                `raindrops/${collectionID}?&perpage=${itemsPerPage}&page=${page}&search=${search}`,
-            ).catch(function (error) {
-                if (axios.isAxiosError(error)) {
-                    console.log(error.message)
-                } else {
-                    error = new AxiosError('An unexpected error occurred')
-                }
-                return Promise.reject(error as AxiosError)
-            })
-            return data
-        }
-
-        return useQuery<RaindropApiResponse, AxiosError>({
-            queryKey: [page, itemsPerPage, search, collectionID],
-            queryFn: () => getList(),
-            staleTime: 6000000,
+    async function getList() {
+        const { data } = await raindropApi<RaindropApiResponse>(
+            `raindrops/${collectionID}?` +
+            `&perpage=${itemsPerPage}` +
+            `&page=${page}`
+            // `&search=${search}`
+        ).catch(function (error: any) {
+            if (axios.isAxiosError(error)) {
+                console.log(error.message)
+            } else {
+                error = new AxiosError('An unexpected error occurred')
+            }
+            return Promise.reject(error as AxiosError)
         })
+        return data
     }
 
-    function checkIfLastPage() {
-        const count = data?.count
-        const totalOfPages = Math.ceil(count! / itemsPerPage)
-        return page + 1 === totalOfPages
+    return useQuery<RaindropApiResponse, AxiosError>({
+        queryKey: [page, itemsPerPage, collectionID],
+        queryFn: () => getList(),
+        staleTime: 6000000,
+    })
+}
+
+export function useReferences(
+    search?: string,
+) {
+    const [page, setPage] = useState<number>(0)
+    const [total, setTotal] = useState<number>(0)
+
+
+    const { data, ...response } = getCollectionRaindropsData(
+        process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID!,
+        // search,
+        page,
+    )
+
+    const [references, setReferences] = useState<Raindrop[]>(data?.items || [])
+
+    useEffect(() => {
+        setTotal(data?.count || 0)
+
+        if (data?.items) {
+            setReferences((prevReferences: Raindrop[]) => [
+                ...prevReferences,
+                ...data.items,
+            ])
+        }
+    }, [data])
+
+    function loadMoreReferences() {
+        setPage((prevPage: number) => prevPage + 1)
+    }
+
+    return { references, total, loadMoreReferences }
+}
+
+
+export function usePaginetedReferences(
+    _index: number = 0,
+    _perPage: number = 10,
+    search?: string,
+    hook: 
+) {
+    const { references, total, loadMoreReferences } = useReferences(search)
+
+    const [index, setIndex] = useState<number>(_index)
+    const [perPage, setPerPage] = useState<number>(_perPage)
+    const firstIndexNextPage = index + perPage
+    const [pageData, setPageData] = useState<Raindrop[]>(references.slice(index, firstIndexNextPage))
+
+
+    const page = Math.floor(index / perPage) + 1
+    const isFirstPage = page === 1
+    const isLastPage = firstIndexNextPage >= total
+
+
+    useEffect(() => {
+        if (references?.length <= firstIndexNextPage) {
+            loadMoreReferences()
+        }
+
+        setPageData(references?.slice(index, firstIndexNextPage))
+    }, [index, perPage, references])
+
+
+    function nextPage() {
+        setIndex((prevIndex: number) => prevIndex + perPage)
+    }
+
+    function previousPage() {
+        setIndex((prevIndex: number) => prevIndex - perPage)
     }
 
     function changePage(direction: string) {
-        if (direction === 'previous' && !isFirstPage) setPage((prevPage: number) => prevPage - 1)
-        if (direction === 'next' && !isLastPage) setPage((prevPage: number) => prevPage + 1)
+        if (direction === 'previous') previousPage()
+        if (direction === 'next') nextPage()
     }
 
-    return { data, isFirstPage, isLastPage, changePage, setPage, ...response }
+    return {
+        pageData,
+        index,
+        setIndex,
+        firstIndexNextPage,
+        perPage,
+        setPerPage,
+        page,
+        isFirstPage,
+        isLastPage,
+        changePage,
+        nextPage,
+        previousPage,
+    }
 }
