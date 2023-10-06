@@ -6,8 +6,7 @@ import { Input } from '@/components/ui/input'
 import { LucideIcons } from '@/components/site/icons'
 import { useRaindrops } from '@/hooks/useRaindrops'
 
-import { ReferenceCard } from '@/components/core/references'
-import { ReferencesSkeleton } from '@/components/core/references/skeleton'
+import { ReferenceCard, ReferencesSkeleton } from './index'
 
 
 export function ReferencesPanel() {

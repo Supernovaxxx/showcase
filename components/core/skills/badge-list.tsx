@@ -1,5 +1,14 @@
-import { SkillBadge, ToggleSkill, SkillIsActive } from '@/components/core/skills'
+import { Badge } from '@/components/ui/badge'
+import { Icon, IconName } from '@/components/site/icons'
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { Skill } from '@/types/core'
+
+import { ToggleSkill, SkillIsActive } from './index'
 
 
 interface SkillBadgesListProps {
@@ -14,35 +23,53 @@ export function SkillBadgesList({ skills,
 }: SkillBadgesListProps) {
 
     return (
-        <section
-            className='
-                flex flex-col justify-center items-center gap-1
-                m-1 sm:m-8
-                sm:w-3/4
-            '
-        >
-            <h2
-                className='
-                    text-xl font-bold text-slate-800
-                '
-            >
-                Filter by skills
-            </h2>
-            <div  
-                className='
-                    flex flex-wrap justify-start gap-2 sm:gap-2
-                    m-2
-                '
-            >
-                {
-                    skills.map((skill, index) => (
-                        <SkillBadge skill={skill}
-                            toggleSkill={toggleSkill}
-                            skillIsActive={skillIsActive}
-                            key={index} />
-                    ))
-                }
-            </div>
-        </section>
+        <>
+            {
+                skills.map((skill, index) => (
+                    <SkillBadge skill={skill}
+                        toggleSkill={toggleSkill}
+                        skillIsActive={skillIsActive}
+                        key={index} />
+                ))
+            }
+        </>
+    )
+}
+
+interface SkillBadgeProps {
+    skill: Skill
+    toggleSkill: ToggleSkill
+    skillIsActive: SkillIsActive
+}
+
+export function SkillBadge({ skill, toggleSkill, skillIsActive }: SkillBadgeProps) {
+
+    return (
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Badge
+                        onClick={() => toggleSkill(skill)}
+                        variant={`${skillIsActive(skill) ? 'secondary' : 'outline'}`}
+                        className='
+                            p-2 sm:p-3
+                            cursor-pointer
+                            transition-all ease-in-out duration-100
+                            hover:opacity-80 hover:scale-105
+                        '
+                    >
+                        <Icon
+                            name={skill as IconName}
+                            className='
+                                w-8 h-8
+                            '
+                        />
+                    </Badge>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>{skill}</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     )
 }

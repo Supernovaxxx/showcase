@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/card'
 import { Icon, IconName } from '@/components/site/icons'
 import { convertDateFromIsoToMonthYear } from '@/lib/utils'
-import { Certificate } from '@/types/core/certificates'
+import { Certificate } from '@/types/core'
 
 
 interface CertificateCardProps {

@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card'
-import { Favicon } from '@/components/site/icons'
+import { ExternalDomainFavicon } from '@/components/site/icons'
 import { convertDateFromIsoToDayMonthYear } from '@/lib/utils'
 import { Reference } from '@/types/core'
 
@@ -37,7 +37,7 @@ export function ReferenceCard({ item }: ReferenceCardProps) {
                     </CardDescription>
                     <CardDescription className='text-sm [font-variant-caps:small-caps]'>
                         {item.domain} {' '}
-                        <Favicon domain={item.domain} />
+                        <ExternalDomainFavicon domain={item.domain} />
                     </CardDescription>
                 </CardHeader>
                 <CardContent className='flex justify-center aspect-video'>

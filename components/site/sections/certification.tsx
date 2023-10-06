@@ -25,7 +25,29 @@ export function CertificationSection() {
             >
                 Certificates
             </h2>
-            <SkillBadgesList skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
+            <div
+                className='
+                flex flex-col justify-center items-center gap-1
+                m-1 sm:m-8
+                sm:w-3/4
+            '
+            >
+                <h2
+                    className='
+                    text-xl font-bold text-slate-800
+                '
+                >
+                    Filter by skills
+                </h2>
+                <div
+                    className='
+                    flex flex-wrap justify-start gap-2 sm:gap-2
+                    m-2
+                '
+                >
+                    <SkillBadgesList skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
+                </div>
+            </div>
             <CertificatesPanel certificates={
                 filterCertificatesBySkills(
                     certificates,
