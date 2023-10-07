@@ -82,10 +82,11 @@ export function usePaginetedReferences(
     const [index, setIndex] = useState<number>(_index)
     const [perPage, setPerPage] = useState<number>(0)
     const firstIndexNextPage = index + perPage
-    const [pageData, setPageData] = useState<Raindrop[]>(references.slice(index, firstIndexNextPage))
-
 
     const page = Math.floor(index / perPage) + 1
+    const lastPage = Math.ceil(total / perPage)
+    const firstIndexLastPage = (lastPage - 1) * perPage
+
     const isFirstPage = page === 1
     const isLastPage = firstIndexNextPage >= total
 
@@ -97,39 +98,45 @@ export function usePaginetedReferences(
         ) {
             loadMoreReferences()
         }
-
-        setPageData(references?.slice(index, firstIndexNextPage))
     }, [index, perPage, references])
 
 
-    function nextPage() {
-        if (!isLastPage)
-            setIndex((prevIndex: number) => prevIndex + perPage)
-    }
-
-    function previousPage() {
-        if (!isFirstPage)
-            setIndex((prevIndex: number) => prevIndex - perPage)
-    }
-
-    function changePage(direction: string) {
-        if (direction === 'previous') previousPage()
-        if (direction === 'next') nextPage()
+    function movePage(step: number) {
+        if (step) {
+            setIndex(
+                Math.min(
+                    Math.max(
+                        index + step * perPage,
+                        0
+                    ),
+                    firstIndexLastPage
+                )
+            )
+        }
     }
 
     return {
-        pageData,
+        pageData: references?.slice(index, firstIndexNextPage),
+
         index,
         setIndex,
         firstIndexNextPage,
+        firstIndexLastPage,
+
         perPage,
         setPerPage,
+
         page,
+        lastPage,
         isFirstPage,
         isLastPage,
-        changePage,
-        nextPage,
-        previousPage,
+
+        movePage,
+        moveToFirstPage: () => setIndex(0),
+        moveToNextPage: () => movePage(1),
+        moveToPreviousPage: () => movePage(-1),
+        moveToLastPage: () => setIndex(firstIndexLastPage),
+
         isLoading,
         ...response
     }
