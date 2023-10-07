@@ -1,34 +1,36 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Button, ButtonProps } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LucideIcons } from '@/components/site/icons'
 import { usePaginetedReferences } from '@/hooks/useRaindrops'
 
 import { ReferenceCard, ReferencesSkeleton } from './index'
 
+import { cn } from '@/lib/utils'
+
 
 export function ReferencesPanel() {
     const { ChevronLeft, ChevronRight } = LucideIcons
 
     const [search, setSearch] = useState<string>('')
-    const [isBigScreen, setIsBigScreen] = useState<boolean>(window.innerWidth >= 1024)
     const {
         pageData,
-        index,
         setIndex,
-        firstIndexNextPage,
+
         perPage,
         setPerPage,
+
         page,
         isFirstPage,
         isLastPage,
-        changePage,
-        nextPage,
-        previousPage,
+
+        moveToPreviousPage,
+        moveToNextPage,
+
         isLoading,
-        isError
+        isError,
     } = usePaginetedReferences(0, search)
 
     window.addEventListener('resize', () => {
@@ -67,23 +69,15 @@ export function ReferencesPanel() {
                     '
             >
                 <Input placeholder='Search' className='w-2/5 sm:w-1/3' onChange={(e) => handleInputChange(e)} />
-                <Button onClick={() => changePage('previous')} variant='outline' size='icon'
-                    className={
-                        isFirstPage
-                            ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
-                            : ''
-                    }
-                >
+                <ChangePageButton changePage={moveToPreviousPage} status={isFirstPage ? 'disabled' : 'default'}>
                     <ChevronLeft className='h-4 w-4' />
-                </Button>
-                <Button onClick={() => changePage('next')} variant='outline' size='icon'
-                    className={
-                        isLastPage
-                            ? 'cursor-default hover:bg-inherit hover:text-slate-500 text-slate-500'
-                            : ''
-                    }>
+                </ChangePageButton>
+                <div className='flex items-center gap-2'>
+                    {page}
+                </div>
+                <ChangePageButton changePage={moveToNextPage} status={isLastPage ? 'disabled' : 'default'}>
                     <ChevronRight className='h-4 w-4' />
-                </Button>
+                </ChangePageButton>
             </div>
             <div
                 className='
@@ -112,6 +106,28 @@ export function ReferencesPanel() {
                         )
                 }
             </div>
-        </section>
+        </section >
+    )
+}
+
+interface ChangePageButtonProps extends ButtonProps {
+    changePage: () => void
+}
+
+function ChangePageButton({ children, className, status, changePage, ...props }: ChangePageButtonProps) {
+    return (
+        <Button
+            variant='outline'
+            size='icon'
+            status={status}
+            {...props}
+            onClick={() => status == 'default' && changePage()}
+            className={cn(
+                'cursor-default hover:bg-muted/50 hover:border-slate-200',
+                className
+            )}
+        >
+            {children}
+        </Button>
     )
 }
