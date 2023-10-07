@@ -17,7 +17,6 @@ export function ReferencesPanel() {
     const [search, setSearch] = useState<string>('')
     const {
         pageData,
-        setIndex,
 
         perPage,
         setPerPage,
@@ -26,10 +25,12 @@ export function ReferencesPanel() {
         isFirstPage,
         isLastPage,
 
+        moveToFirstPage,
         moveToPreviousPage,
         moveToNextPage,
 
         isLoading,
+        isFetchingNextPage,
         isError,
     } = usePaginetedReferences(0, search)
 
@@ -40,8 +41,8 @@ export function ReferencesPanel() {
     }, [window.width])
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setIndex(0)
         setSearch(e.target.value)
+        moveToFirstPage()
     }
 
     return (
@@ -59,13 +60,19 @@ export function ReferencesPanel() {
                     '
             >
                 <Input placeholder='Search' className='w-2/5 sm:w-1/3' onChange={(e) => handleInputChange(e)} />
-                <ChangePageButton changePage={moveToPreviousPage} status={isFirstPage ? 'disabled' : 'default'}>
+                <ChangePageButton
+                    changePage={moveToPreviousPage}
+                    status={isLoading || isFetchingNextPage || isFirstPage ? 'disabled' : 'default'}
+                >
                     <ChevronLeft className='h-4 w-4' />
                 </ChangePageButton>
                 <div className='flex items-center gap-2'>
                     {page}
                 </div>
-                <ChangePageButton changePage={moveToNextPage} status={isLastPage ? 'disabled' : 'default'}>
+                <ChangePageButton
+                    changePage={moveToNextPage}
+                    status={isLoading || isFetchingNextPage || isLastPage ? 'disabled' : 'default'}
+                >
                     <ChevronRight className='h-4 w-4' />
                 </ChangePageButton>
             </div>
@@ -78,22 +85,22 @@ export function ReferencesPanel() {
                     '
             >
                 {
-                    isLoading
-                    ? <ReferencesSkeleton perPage={perPage} />
-                    : isError
-                        ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
-                        :
-                    pageData.length > 0
-                        ? pageData.map((item, index) => {
-                            return (
-                                <ReferenceCard item={item} key={index} />
-                            )
-                        })
-                        : (
-                            <p className='w-full text-lg col-span-full text-center pt-8'>
-                                No references found for '<strong>{search}</strong>'. Please try again.
-                            </p>
-                        )
+                    isLoading || isFetchingNextPage
+                        ? <ReferencesSkeleton perPage={perPage} />
+                        : isError
+                            ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
+                            :
+                            pageData?.length
+                                ? pageData.map((item, index) => {
+                                    return (
+                                        <ReferenceCard item={item} key={index} />
+                                    )
+                                })
+                                : (
+                                    <p className='w-full text-lg col-span-full text-center pt-8'>
+                                        No references found for '<strong>{search}</strong>'. Please try again.
+                                    </p>
+                                )
                 }
             </div>
         </section >
