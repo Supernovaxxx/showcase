@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { Button, ButtonProps } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { LucideIcons } from '@/components/site/icons'
+import { ChevronLeft, ChevronRight } from '@/components/site/icons'
 
 import { ReferenceCard, ReferencesSkeleton } from './index'
 
@@ -13,7 +13,6 @@ import { usePaginetedReferences } from '@/hooks/useRaindrops'
 
 
 export function ReferencesPanel() {
-    const { ChevronLeft, ChevronRight } = LucideIcons
 
     const [search, setSearch] = useState<string>('')
     const {

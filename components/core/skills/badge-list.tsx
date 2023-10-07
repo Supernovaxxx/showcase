@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/badge'
-import { Icon, IconName } from '@/components/site/icons'
+import { Logo, LogoName } from '@/components/site/icons'
 import {
     Tooltip,
     TooltipContent,
@@ -58,8 +58,8 @@ export function SkillBadge({ skill, toggleSkill, skillIsActive }: SkillBadgeProp
                             hover:opacity-80 hover:scale-105
                         '
                     >
-                        <Icon
-                            name={skill as IconName}
+                        <Logo
+                            name={skill as LogoName}
                             className='
                                 w-8 h-8
                             '
