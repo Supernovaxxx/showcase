@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Icon, IconName } from '@/components/site/icons'
+import { Logo, LogoName } from '@/components/site/icons'
 import { convertDateFromIsoToMonthYear } from '@/lib/utils'
 import { Certificate } from '@/types/core'
 
@@ -32,7 +32,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
         <CardDescription>
           {certificate.issuer.title}
           {' '}
-          <Icon name={certificate.issuer.title as IconName}
+          <Logo name={certificate.issuer.title as LogoName}
             className='
                 inline
                 w-3 h-3 sm:w-4 sm:h-4 
@@ -47,7 +47,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
       >
         {
           certificate.skills.map((skill, index) => (
-            <Icon name={skill as IconName}
+            <Logo name={skill as LogoName}
               key={index}
               className='
                   inline
