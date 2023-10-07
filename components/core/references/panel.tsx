@@ -9,8 +9,7 @@ import { ReferenceCard, ReferencesSkeleton } from './index'
 
 import { cn } from '@/lib/utils'
 import { useWindowProperties } from '@/hooks/useWindowProperties'
-import { useReferences } from '@/hooks/useRaindrops'
-
+import { useReferences } from '@/hooks/useReferences'
 
 export function ReferencesPanel() {
 
