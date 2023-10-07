@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useInfiniteQuery } from 'react-query'
+import { InfiniteData, useInfiniteQuery, UseInfiniteQueryResult } from 'react-query'
 
 import { axios, AxiosError, raindropApi } from '@/lib/sdk'
 import { Raindrop, RaindropApiResponse } from '@/types/data/raindrops'
@@ -51,51 +51,50 @@ function useCollectionRaindropsInfiniteQuery(
 }
 
 export function useReferences(search?: string) {
-
-    const connection = useCollectionRaindropsInfiniteQuery(
-        process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID!,
-        search,
-    )
-
-    const references =
-        connection.data?.pages
-            .reduce<Raindrop[]>((acc, page) => [...acc, ...page.items], [])
-
-    const total = connection.data?.pages[0].count || 0
-
-    return {
-        references,
-        total,
-        ...connection,
-    }
+    return usePagination<RaindropApiResponse, Raindrop>({
+        infiniteQuery: () => {
+            return useCollectionRaindropsInfiniteQuery(
+                process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID!,
+                search,
+            )
+        },
+        getItems: (data) => data?.pages.reduce<Raindrop[]>((acc, page) => [...acc, ...page.items], []) || [],
+        getTotal: (data) => data?.pages[0].count || 0,
+    })
 }
 
-export function usePaginetedReferences(
-    _index: number = 0,
-    search?: string,
-) {
-    const { references, total, data, isLoading, fetchNextPage, ...response } = useReferences(search)
+interface usePaginationParams<TData, TItem> {
+    infiniteQuery: () => UseInfiniteQueryResult<TData>,
+    getItems: (data?: InfiniteData<TData>) => TItem[],
+    getTotal: (data?: InfiniteData<TData>) => number,
+}
 
-    const [index, setIndex] = useState<number>(_index)
+export function usePagination<TData, TItem>({ infiniteQuery, getItems, getTotal }: usePaginationParams<TData, TItem>) {
+    const { data, isLoading, fetchNextPage, ...response } = infiniteQuery()
+
+    const items = getItems(data)
+    const total = getTotal(data)
+
+    const [index, setIndex] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(0)
     const firstIndexNextPage = index + perPage
 
-    const page = Math.floor(index / perPage) + 1
+    const page = Math.floor(index / perPage)
     const lastPage = Math.ceil(total / perPage)
     const firstIndexLastPage = (lastPage - 1) * perPage
 
-    const isFirstPage = page === 1
+    const isFirstPage = page === 0
     const isLastPage = firstIndexNextPage >= total
 
     useEffect(() => {
         if (
             !isLoading
-            && references && references.length <= firstIndexNextPage
+            && items && items.length <= firstIndexNextPage
             && !isLastPage
         ) {
             fetchNextPage()
         }
-    }, [index, perPage, references])
+    }, [index, perPage, items])
 
 
     function movePage(step: number) {
@@ -113,7 +112,7 @@ export function usePaginetedReferences(
     }
 
     return {
-        pageData: references?.slice(index, firstIndexNextPage),
+        pageData: items?.slice(index, firstIndexNextPage),
 
         index,
         setIndex,
@@ -123,7 +122,7 @@ export function usePaginetedReferences(
         perPage,
         setPerPage,
 
-        page,
+        page: page || 0,
         lastPage,
         isFirstPage,
         isLastPage,
