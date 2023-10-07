@@ -9,7 +9,7 @@ import { ReferenceCard, ReferencesSkeleton } from './index'
 
 import { cn } from '@/lib/utils'
 import { useWindowProperties } from '@/hooks/useWindowProperties'
-import { usePaginetedReferences } from '@/hooks/useRaindrops'
+import { useReferences } from '@/hooks/useRaindrops'
 
 
 export function ReferencesPanel() {
@@ -30,9 +30,9 @@ export function ReferencesPanel() {
         moveToNextPage,
 
         isLoading,
-        isFetchingNextPage,
+        isFetching,
         isError,
-    } = usePaginetedReferences(0, search)
+    } = useReferences(search)
 
     const window = useWindowProperties()
 
@@ -62,7 +62,7 @@ export function ReferencesPanel() {
                 <Input placeholder='Search' className='w-2/5 sm:w-1/3' onChange={(e) => handleInputChange(e)} />
                 <ChangePageButton
                     changePage={moveToPreviousPage}
-                    status={isLoading || isFetchingNextPage || isFirstPage ? 'disabled' : 'default'}
+                    status={isLoading || isFetching || isFirstPage ? 'disabled' : 'default'}
                 >
                     <ChevronLeft className='h-4 w-4' />
                 </ChangePageButton>
@@ -71,7 +71,7 @@ export function ReferencesPanel() {
                 </div>
                 <ChangePageButton
                     changePage={moveToNextPage}
-                    status={isLoading || isFetchingNextPage || isLastPage ? 'disabled' : 'default'}
+                    status={isLoading || isFetching || isLastPage ? 'disabled' : 'default'}
                 >
                     <ChevronRight className='h-4 w-4' />
                 </ChangePageButton>
@@ -85,7 +85,7 @@ export function ReferencesPanel() {
                     '
             >
                 {
-                    isLoading || isFetchingNextPage
+                    isLoading || isFetching
                         ? <ReferencesSkeleton perPage={perPage} />
                         : isError
                             ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
