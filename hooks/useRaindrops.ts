@@ -1,83 +1,80 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useQuery } from 'react-query'
+import { useInfiniteQuery } from 'react-query'
 
 import { axios, AxiosError, raindropApi } from '@/lib/sdk'
 import { Raindrop, RaindropApiResponse } from '@/types/data/raindrops'
 
-function getCollectionRaindropsData(
+
+async function _getCollectionRaindropsData(
     collectionID: string,
     search?: string,
     page: number = 0,
-    itemsPerPage: number = 50,
+    perPage: number = 50
 ) {
-    async function getList() {
-        const { data } = await raindropApi<RaindropApiResponse>(
-            `raindrops/${collectionID}?` +
-            `&perpage=${itemsPerPage}` +
-            `&page=${page}` +
-            `&search=${search}`
-        ).catch(function (error: any) {
-            if (axios.isAxiosError(error)) {
-                console.log(error.message)
-            } else {
-                error = new AxiosError('An unexpected error occurred')
-            }
-            return Promise.reject(error as AxiosError)
-        })
-        return data
-    }
-    return useQuery<RaindropApiResponse, AxiosError>({
-        queryKey: [page, itemsPerPage, collectionID, search],
-        queryFn: () => getList(),
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    const { data } = await raindropApi<RaindropApiResponse>(
+        `raindrops/${collectionID}` +
+        `?perpage=${perPage}` +
+        `&page=${page}` +
+        `&search=${search}`
+    ).catch(function (error: any) {
+        if (axios.isAxiosError(error)) {
+            console.log(error.message)
+        } else {
+            error = new AxiosError('An unexpected error occurred')
+        }
+        return Promise.reject(error as AxiosError)
+    })
+    return data
+}
+
+function useCollectionRaindropsInfiniteQuery(
+    collectionID: string,
+    search?: string,
+    page: number = 0,
+    perPage: number = 50,
+) {
+
+    return useInfiniteQuery<RaindropApiResponse, AxiosError>({
+        queryKey: [collectionID, search, page, perPage],
+        queryFn: () => _getCollectionRaindropsData(collectionID, search, page, perPage),
         staleTime: 6000000,
+        getNextPageParam: (lastPage, pages) => {
+            const maxPageParam = Math.ceil(lastPage.count / perPage)
+            if (maxPageParam > pages.length)
+                return pages.length;
+            return undefined;
+        }
     })
 }
 
 export function useReferences(search?: string) {
 
-    const [page, setPage] = useState<number>(0)
-    const [total, setTotal] = useState<number>(0)
-    const [searchString, setSearchString] = useState<string>('')
-
-    const { data, isLoading, ...response } = getCollectionRaindropsData(
+    const connection = useCollectionRaindropsInfiniteQuery(
         process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID!,
-        searchString,
-        page,
+        search,
     )
 
-    const [references, setReferences] = useState<Raindrop[]>(
-        data !== undefined ? data.items : []
-    )
-    useEffect(() => {
-        setTotal(data?.count || 0)
+    const references =
+        connection.data?.pages
+            .reduce<Raindrop[]>((acc, page) => [...acc, ...page.items], [])
 
-        if (data?.items) {
-            setReferences((prevReferences: Raindrop[]) => [
-                ...prevReferences,
-                ...data.items,
-            ])
-        }
-    }, [data])
+    const total = connection.data?.pages[0].count || 0
 
-    useEffect(() => {
-        setSearchString(search || '')
-        setPage(0)
-    }, [search])
-
-    function loadMoreReferences() {
-        setPage((prevPage: number) => prevPage + 1)
+    return {
+        references,
+        total,
+        ...connection,
     }
-
-    return { references, isLoading, total, loadMoreReferences, ...response }
 }
-
 
 export function usePaginetedReferences(
     _index: number = 0,
     search?: string,
 ) {
-    const { references, isLoading, total, loadMoreReferences, ...response } = useReferences(search)
+    const { references, total, data, isLoading, fetchNextPage, ...response } = useReferences(search)
 
     const [index, setIndex] = useState<number>(_index)
     const [perPage, setPerPage] = useState<number>(0)
@@ -93,10 +90,10 @@ export function usePaginetedReferences(
     useEffect(() => {
         if (
             !isLoading
-            && references?.length <= firstIndexNextPage
+            && references && references.length <= firstIndexNextPage
             && !isLastPage
         ) {
-            loadMoreReferences()
+            fetchNextPage()
         }
     }, [index, perPage, references])
 
