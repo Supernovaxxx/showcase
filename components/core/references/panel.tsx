@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 import { Button, ButtonProps } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LucideIcons } from '@/components/site/icons'
-import { usePaginetedReferences } from '@/hooks/useRaindrops'
 
 import { ReferenceCard, ReferencesSkeleton } from './index'
 
 import { cn } from '@/lib/utils'
+import { useWindowProperties } from '@/hooks/useWindowProperties'
+import { usePaginetedReferences } from '@/hooks/useRaindrops'
 
 
 export function ReferencesPanel() {
@@ -33,21 +34,11 @@ export function ReferencesPanel() {
         isError,
     } = usePaginetedReferences(0, search)
 
-    window.addEventListener('resize', () => {
-        const isBigScreen = window.innerWidth >= 1024
-        setIsBigScreen(isBigScreen)
-    })
+    const window = useWindowProperties()
 
     useEffect(() => {
-        function handleResize() {
-            if (isBigScreen) {
-                setPerPage(6)
-            } else {
-                setPerPage(4)
-            }
-        }
-        handleResize()
-    }, [isBigScreen])
+        setPerPage(window.width > 1024 ? 6 : 4)
+    }, [window.width])
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         setIndex(0)
