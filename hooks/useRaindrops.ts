@@ -34,9 +34,8 @@ function getCollectionRaindropsData(
     })
 }
 
-export function useReferences(
-    search?: string,
-) {
+export function useReferences(search?: string) {
+
     const [page, setPage] = useState<number>(0)
     const [total, setTotal] = useState<number>(0)
     const [searchString, setSearchString] = useState<string>('')
@@ -62,14 +61,9 @@ export function useReferences(
     }, [data])
 
     useEffect(() => {
-        if (search === undefined || search === '') {
-            setSearchString('')
-        } else {
-            setSearchString(search)
-        }
+        setSearchString(search || '')
         setPage(0)
-        setReferences([])
-    },[search])
+    }, [search])
 
     function loadMoreReferences() {
         setPage((prevPage: number) => prevPage + 1)
