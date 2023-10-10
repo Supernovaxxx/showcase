@@ -1,40 +1,32 @@
 'use client'
 import { useInfiniteQuery } from 'react-query'
 
+import { LocalApi } from '@/lib/sdk/local'
 import { Reference } from '@/types/core'
-import { getCollectionRaindropsData } from '@/lib/sdk/raindrop'
 
 import { usePagination } from './utils'
 
 
-function useCollectionRaindropsInfiniteQuery(
-    collectionID: string,
+function useReferencesInfiniteQuery(
     search?: string,
     page: number = 0,
-    perPage: number = 50,
 ) {
+    const api = new LocalApi()
+
     return useInfiniteQuery({
-        queryKey: [collectionID, search, page, perPage],
-        queryFn: () => getCollectionRaindropsData(collectionID, search, page, perPage),
+        queryKey: [search, page],
+        queryFn: () => api.getReferencesData(search, page),
         staleTime: 6000000,
-        getNextPageParam: (lastPage, pages) => {
-            const maxPageParam = Math.ceil(lastPage.count / perPage)
-            if (maxPageParam > pages.length)
-                return pages.length;
-            return undefined;
-        }
+        getNextPageParam: (lastPage) => lastPage.next_page_index
     })
 }
 
 export function useReferences(search?: string) {
     return usePagination({
         infiniteQuery: () => {
-            return useCollectionRaindropsInfiniteQuery(
-                process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID!,
-                search,
-            )
+            return useReferencesInfiniteQuery(search)
         },
-        getItems: (data) => data?.pages.reduce<Reference[]>((acc, page) => [...acc, ...page.items], []) || [],
-        getTotal: (data) => data?.pages[0].count || 0,
+        getItems: (data) => data?.pages.reduce<Reference[]>((acc, page) => [...acc, ...page.references], []) || [],
+        getTotal: (data) => data?.pages[0].total_items || 0,
     })
 }

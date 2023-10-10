@@ -4,10 +4,10 @@ import { Raindrop } from '@/types/data/raindrops'
 export interface Certificate {
     title: string,
     date: string, // TODO: define date type (mm/dd/aaaa | mm/aaaa)
-    skills: string[],
+    skills: Skill[],
     issuer: {
-            title: string,
-            logo: string
+        title: string,
+        logo: string
     },
     imageUrl: string,
     certificateUrl: string
