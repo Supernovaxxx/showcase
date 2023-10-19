@@ -20,7 +20,7 @@ export function useReferencesInfiniteQuery(
 }
 
 export function useReferences(search?: string) {
-    const { data, isError, hasNextPage, fetchNextPage, ...response } = useReferencesInfiniteQuery(search)
+    const { data, ...response } = useReferencesInfiniteQuery(search)
     
     const [references, setReferences] = useState(flatReferences)
 
@@ -32,5 +32,5 @@ export function useReferences(search?: string) {
         setReferences(flatReferences)
     },[data])
 
-    return { references, isError, hasNextPage, fetchNextPage, ...response }
+    return { references, ...response }
 }

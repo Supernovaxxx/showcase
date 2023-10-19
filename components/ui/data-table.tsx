@@ -1,13 +1,9 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
-import { FetchNextPageOptions, InfiniteQueryObserverResult } from 'react-query'
 import {
   ColumnDef,
   flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
+  Table as TanstackTable,
 } from '@tanstack/react-table'
 
 import {
@@ -18,66 +14,23 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { ReferenceListApiResponse } from '@/types/api'
 
 import { Button } from './button'
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[],
-  data: TData[],
+  table: TanstackTable<TData>,
   hasNextPage: boolean | undefined,
-  fetchNextPage: (options?: FetchNextPageOptions | undefined) => Promise<InfiniteQueryObserverResult<ReferenceListApiResponse, unknown>>,
-  page: number,
-  setPage: Dispatch<SetStateAction<number>>
+  isFetching: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
+  table,
   hasNextPage,
-  fetchNextPage,
-  page,
-  setPage
+  isFetching
 }: DataTableProps<TData, TValue>) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    autoResetPageIndex: false,
-    state: {
-      pagination: {
-        pageIndex: page,
-        pageSize: 10
-      }
-    },
-    onPaginationChange: (updater) => {
-      const updated_state =
-        typeof updater === 'function'
-          ? updater(table.getState().pagination)
-          : updater
-
-      if (updated_state.pageIndex !== pageIndex) {
-        const pageCount = table.getPageCount();
-        if (updated_state.pageIndex === pageCount - 2 && hasNextPage) {
-          fetchNextPage()
-        }
-      }
-    }
-  })
-
-  const pageIndex = table.getState().pagination.pageIndex
-
-  function handleNextPage() {
-    table.nextPage()
-    setPage(pageIndex + 1)
-  }
-
-  function handlePreviousPage() {
-    table.previousPage()
-    setPage(pageIndex - 1)
-  }
 
   return (
     <>
@@ -85,7 +38,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant='outline'
           size='sm'
-          onClick={() => handlePreviousPage()}
+          onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
           Previous
@@ -96,8 +49,8 @@ export function DataTable<TData, TValue>({
         <Button
           variant='outline'
           size='sm'
-          onClick={() => handleNextPage()}
-          disabled={!table.getCanNextPage()}
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage() && (!hasNextPage || isFetching)}
         >
           Next
         </Button>
