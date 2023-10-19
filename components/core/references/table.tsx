@@ -1,16 +1,16 @@
-import { getLearnlogData } from "@/lib/sdk/learnlog"
+'use client'
+import { useState } from "react"
+
 import { DataTable } from "@/components/ui/data-table"
+import { useReferences } from "@/hooks/useReferences"
 
 import { columns } from "./columns"
 
 
-async function getReferences() {
-  const data = await getLearnlogData()
-  return data
-}
+export function ReferencesTable() {
 
-export async function ReferencesTable() {
-  const refData = await getReferences()
+  const { references, isError, hasNextPage, fetchNextPage, ...response } = useReferences()
+  const [page, setPage] = useState<number>(0)
 
   return (
     <div
@@ -28,7 +28,19 @@ export async function ReferencesTable() {
         Learnlog table
       </h2>
       <div className='w-4/5'>
-        <DataTable columns={columns} data={refData.items} />
+        {
+          isError
+            ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
+            :
+            references?.length
+              ? <DataTable columns={columns} data={references} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} page={page} setPage={setPage} />
+              : (
+                <p className='w-full text-lg col-span-full text-center pt-8'>
+                  Loading...
+                </p>
+              )
+        }
+
       </div>
     </div>
   )

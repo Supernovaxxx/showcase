@@ -4,10 +4,10 @@ import { getLearnlogData } from '@/lib/sdk/learnlog'
 export async function GET(request: Request) {
     const { search, page } = _getSearchParams(request)
 
-    const learnlog_data = await getLearnlogData(search, page)
+    const { items, ...learnlog_data} = await getLearnlogData(search, page)
 
     return Response.json({
-        references: learnlog_data.items,
+        references: items,
         ...learnlog_data
     })
 }

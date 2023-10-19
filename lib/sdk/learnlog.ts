@@ -19,7 +19,7 @@ export async function getLearnlogData(search?: string, page: number = 0) {
     const total_items = data.count
     const total_pages = Math.ceil(total_items / PER_PAGE)
 
-    const response = {
+    return {
 
         items: data.items,
         page_index: page,
@@ -29,6 +29,4 @@ export async function getLearnlogData(search?: string, page: number = 0) {
         total_items,
         total_pages,
     }
-    
-    return response
 }

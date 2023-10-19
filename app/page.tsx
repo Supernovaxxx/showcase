@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <main>
       <ReferencesTable />
-      <LearnlogSection />
+      {/* <LearnlogSection /> */}
       <CertificationSection />
     </main>
   )
