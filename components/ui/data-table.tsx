@@ -15,6 +15,8 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
+import { ChevronLeft, ChevronRight, Loading } from '@/components/site/icons'
+
 import { Button } from './button'
 
 
@@ -41,7 +43,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          <ChevronLeft className='h-4 w-5' />
         </Button>
         <div className='flex items-center gap-2'>
           {table.getState().pagination.pageIndex}
@@ -52,7 +54,9 @@ export function DataTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage() && (!hasNextPage || isFetching)}
         >
-          Next
+          { !table.getCanNextPage() && isFetching
+            ? <Loading className='h-5 w-5'/>
+            : <ChevronRight className='h-4 w-5' /> }
         </Button>
       </div>
       <div className='rounded-md border'>
