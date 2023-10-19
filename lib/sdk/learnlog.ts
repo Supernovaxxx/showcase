@@ -1,7 +1,7 @@
 import { RaindropsApi } from "./raindrop"
 
 
-const PER_PAGE = 50
+const PER_PAGE = 25
 
 export async function getLearnlogData(search?: string, page: number = 0) {
     const api = new RaindropsApi(
