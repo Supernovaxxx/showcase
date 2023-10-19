@@ -6,7 +6,7 @@ const PER_PAGE = 25
 export async function getLearnlogData(search?: string, page: number = 0) {
     const api = new RaindropsApi(
         process.env.RAINDROP_API_BASE_URL!,
-        process.env.RAINDROP_TOKEN!
+        process.env.RAINDROP_API_TOKEN!
     )
 
     let data = await api.getCollectionRaindropsData(
