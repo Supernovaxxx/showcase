@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from 'react'
 import { useInfiniteQuery } from 'react-query'
 
 import { LocalApi } from '@/lib/sdk/local'
@@ -22,15 +21,7 @@ export function useReferencesInfiniteQuery(
 export function useReferences(search?: string) {
     const { data, ...response } = useReferencesInfiniteQuery(search)
     
-    const [references, setReferences] = useState(flatReferences)
-
-    function flatReferences() {
-        return data?.pages.flatMap((page) => page.references) || []
-    }
-
-    useEffect(() => {
-        setReferences(flatReferences)
-    },[data])
+    const references = data?.pages.flatMap((page) => page.references) || []
 
     return { references, ...response }
 }

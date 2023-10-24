@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  ColumnDef,
   flexRender,
   Table as TanstackTable,
 } from '@tanstack/react-table'
@@ -21,14 +20,12 @@ import { Button } from './button'
 
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[],
   table: TanstackTable<TData>,
   hasNextPage: boolean | undefined,
   isFetching: boolean
 }
 
 export function DataTable<TData, TValue>({
-  columns,
   table,
   hasNextPage,
   isFetching
@@ -95,7 +92,7 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className='h-24 text-center'>
+                <TableCell colSpan={table.getAllColumns().length} className='h-24 text-center'>
                   No results.
                 </TableCell>
               </TableRow>

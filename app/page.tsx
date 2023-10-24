@@ -2,7 +2,7 @@ import { CertificationSection, LearnlogSection } from '@/components/site/section
 import { ReferencesTable } from '@/components/core/references/table'
 
 
-export default async function Home() {
+export default function Home() {
 
   return (
     <main>

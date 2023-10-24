@@ -36,17 +36,13 @@ export function ReferencesTable() {
           ? updater(table.getState().pagination)
           : updater
 
-      if (updated_state.pageIndex !== pageIndex) {
-        const pageCount = table.getPageCount();
+        const pageCount = table.getPageCount()
         if (updated_state.pageIndex === pageCount - 2 && hasNextPage) {
           fetchNextPage()
         }
-      }
       setPage(updated_state.pageIndex)
     }
   })
-
-  const pageIndex = table.getState().pagination.pageIndex
 
   return (
     <div className='flex flex-col justify-center items-center gap-2
@@ -60,7 +56,7 @@ export function ReferencesTable() {
           isError
             ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
             : references?.length
-              ? <DataTable columns={columns} table={table} hasNextPage={hasNextPage} isFetching={isFetching} />
+              ? <DataTable table={table} hasNextPage={hasNextPage} isFetching={isFetching} />
               : (
                 <p className='w-full text-lg col-span-full text-center pt-8'>
                   Loading...
