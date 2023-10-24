@@ -2,31 +2,26 @@
 import { useInfiniteQuery } from 'react-query'
 
 import { LocalApi } from '@/lib/sdk/local'
-import { Reference } from '@/types/core'
-
-import { usePagination } from './utils'
 
 
-function useReferencesInfiniteQuery(
+export function useReferencesInfiniteQuery(
     search?: string,
-    page: number = 0,
 ) {
     const api = new LocalApi()
 
     return useInfiniteQuery({
-        queryKey: [search, page],
-        queryFn: () => api.getReferencesData(search, page),
+        queryKey: [search],
+        queryFn: ({pageParam}) => api.getReferencesData(search, pageParam),
         staleTime: 6000000,
-        getNextPageParam: (lastPage) => lastPage.next_page_index
+        getNextPageParam: (lastPage) => lastPage.next_page_index,
+        keepPreviousData: true
     })
 }
 
 export function useReferences(search?: string) {
-    return usePagination({
-        infiniteQuery: () => {
-            return useReferencesInfiniteQuery(search)
-        },
-        getItems: (data) => data?.pages.reduce<Reference[]>((acc, page) => [...acc, ...page.references], []) || [],
-        getTotal: (data) => data?.pages[0].total_items || 0,
-    })
+    const { data, ...response } = useReferencesInfiniteQuery(search)
+    
+    const references = data?.pages.flatMap((page) => page.references) || []
+
+    return { references, ...response }
 }

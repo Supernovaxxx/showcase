@@ -1,11 +1,13 @@
 import { CertificationSection, LearnlogSection } from '@/components/site/sections'
+import { ReferencesTable } from '@/components/core/references/table'
 
 
 export default function Home() {
 
   return (
     <main>
-      <LearnlogSection />
+      <ReferencesTable />
+      {/* <LearnlogSection /> */}
       <CertificationSection />
     </main>
   )

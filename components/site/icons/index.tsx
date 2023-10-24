@@ -4,3 +4,4 @@ export { Logo, type LogoName } from './logo'
 export * from './logos'
 
 export { ExternalDomainFavicon } from './externalDomainFavicon'
+export { Loading } from './loading'
