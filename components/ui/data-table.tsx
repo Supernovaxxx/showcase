@@ -21,16 +21,14 @@ import { Button } from './button'
 
 interface DataTableProps<TData, TValue> {
   table: TanstackTable<TData>,
-  hasNextPage: boolean | undefined,
-  isFetching: boolean
 }
 
 export function DataTable<TData, TValue>({
   table,
-  hasNextPage,
-  isFetching
 }: DataTableProps<TData, TValue>) {
 
+  const { hasNextPage, isFetching } = table.options.meta!
+  
   return (
     <>
       <div className='flex items-center justify-end space-x-2 py-4'>

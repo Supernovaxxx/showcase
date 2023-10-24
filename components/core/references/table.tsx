@@ -41,7 +41,8 @@ export function ReferencesTable() {
           fetchNextPage()
         }
       setPage(updated_state.pageIndex)
-    }
+    },
+    meta: { hasNextPage, isFetching }
   })
 
   return (
@@ -56,7 +57,7 @@ export function ReferencesTable() {
           isError
             ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
             : references?.length
-              ? <DataTable table={table} hasNextPage={hasNextPage} isFetching={isFetching} />
+              ? <DataTable table={table} />
               : (
                 <p className='w-full text-lg col-span-full text-center pt-8'>
                   Loading...
