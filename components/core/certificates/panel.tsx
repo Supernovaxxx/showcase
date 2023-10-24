@@ -1,12 +1,15 @@
 'use client'
-import { useEffect } from 'react'
-
+import { useState } from 'react'
 import {
+  useReactTable,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
-  useReactTable
-} from '@tanstack/react-table'
+} from "@tanstack/react-table"
+
+import { DataGrid } from '@/components/ui/data-grid'
+import { Certificate } from '@/types/core'
+
+import { columns } from "./columns"
 
 import { getCertificates, getSkillList } from '@/lib/data'
 import { useSkills } from '@/hooks/useSkills'
@@ -14,29 +17,39 @@ import { SkillBadgesList } from '@/components/core/skills'
 import { CertificateGrid } from '@/components/ui/certificate-grid'
 import { Skill } from '@/types/core'
 
-import { columns } from './columns'
+interface CertificatesPanelProps {
+  certificates: Certificate[]
+}
 
+export function CertificatesPanel({ certificates }: CertificatesPanelProps) {
+  
+  const [page, setPage] = useState<number>(0)
 
-export function CertificatesPanel() {
-
-  let certificates = getCertificates()
-  const SKILL_LIST = getSkillList()
-
-  const table = useReactTable({
+  //TODO: handle hasNextPage and isFetching if not sending in 'meta'
+  const hasNextPage = false
+  const isFetching = false
+  
+  const data = useReactTable({
     data: certificates,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    initialState: {
+    autoResetPageIndex: false,
+    state: {
       pagination: {
+        pageIndex: page,
         pageSize: 9
-      },
+      }
     },
-    meta: {
-      hasNextPage: undefined,
-      isFetching: undefined
+    onPaginationChange: (updater) => {
+      const updated_state =
+        typeof updater === 'function'
+          ? updater(data.getState().pagination)
+          : updater
+
+      setPage(updated_state.pageIndex)
     },
+    meta: { hasNextPage, isFetching }
   })
 
   function setFilteredSkills(selectedSkills: Skill[]) {
@@ -53,23 +66,15 @@ export function CertificatesPanel() {
   }, [selectedSkills])
 
   return (
-    <>
-      <div className='flex flex-col justify-center items-center gap-1 m-1 sm:m-8 sm:w-3/4'>
-        <h2 className='text-xl font-bold text-slate-800'>
-          Filter by skills
-        </h2>
-        <div className='flex flex-wrap justify-start gap-2 sm:gap-2 m-2'>
-          <SkillBadgesList skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
-        </div>
-      </div>
-      <div className='
+    <section
+      className='
         flex flex-col justify-center items-center gap-y-2 sm:gap-4
         my-4 mx-2 sm:mx-8
         w-11/12 sm:w-4/5
         text-slate-800
-      '>
-        <CertificateGrid table={table} />
-      </div>
-    </>
+      '
+    >
+      <DataGrid data={data} />
+    </section>
   )
 }
