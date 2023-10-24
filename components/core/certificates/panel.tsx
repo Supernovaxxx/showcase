@@ -1,6 +1,15 @@
+'use client'
+import { useState } from 'react'
+import {
+  useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
+} from "@tanstack/react-table"
+
+import { DataGrid } from '@/components/ui/data-grid'
 import { Certificate } from '@/types/core'
 
-import { CertificateCard } from './index'
+import { columns } from "./columns"
 
 
 interface CertificatesPanelProps {
@@ -8,6 +17,35 @@ interface CertificatesPanelProps {
 }
 
 export function CertificatesPanel({ certificates }: CertificatesPanelProps) {
+  
+  const [page, setPage] = useState<number>(0)
+
+  //TODO: handle hasNextPage and isFetching if not sending in 'meta'
+  const hasNextPage = false
+  const isFetching = false
+  
+  const data = useReactTable({
+    data: certificates,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    autoResetPageIndex: false,
+    state: {
+      pagination: {
+        pageIndex: page,
+        pageSize: 9
+      }
+    },
+    onPaginationChange: (updater) => {
+      const updated_state =
+        typeof updater === 'function'
+          ? updater(data.getState().pagination)
+          : updater
+
+      setPage(updated_state.pageIndex)
+    },
+    meta: { hasNextPage, isFetching }
+  })
 
   return (
     <section
@@ -18,18 +56,7 @@ export function CertificatesPanel({ certificates }: CertificatesPanelProps) {
         text-slate-800
       '
     >
-      <div
-        className='
-          grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4
-          w-full
-          '
-      >
-        {
-          certificates.map((item: Certificate, index) => (
-            <CertificateCard certificate={item} key={index} />
-          ))
-        }
-      </div>
+      <DataGrid data={data} />
     </section>
   )
 }

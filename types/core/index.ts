@@ -5,10 +5,7 @@ export interface Certificate {
     title: string,
     date: string, // TODO: define date type (mm/dd/aaaa | mm/aaaa)
     skills: Skill[],
-    issuer: {
-        title: string,
-        logo: string
-    },
+    issuer: string,
     imageUrl: string,
     certificateUrl: string
 }
