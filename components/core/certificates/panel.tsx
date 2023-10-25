@@ -6,7 +6,7 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table"
 
-import { DataGrid } from '@/components/ui/data-grid'
+import { CertificateGrid } from '@/components/ui/certificate-grid'
 import { Certificate } from '@/types/core'
 
 import { columns } from "./columns"
@@ -17,36 +17,24 @@ interface CertificatesPanelProps {
 }
 
 export function CertificatesPanel({ certificates }: CertificatesPanelProps) {
-  
-  const [page, setPage] = useState<number>(0)
 
-  //TODO: handle hasNextPage and isFetching if not sending in 'meta'
-  const hasNextPage = false
-  const isFetching = false
-  
-  const data = useReactTable({
+  const table = useReactTable({
     data: certificates,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     autoResetPageIndex: false,
-    state: {
+    initialState: {
       pagination: {
-        pageIndex: page,
         pageSize: 9
       }
     },
-    onPaginationChange: (updater) => {
-      const updated_state =
-        typeof updater === 'function'
-          ? updater(data.getState().pagination)
-          : updater
-
-      setPage(updated_state.pageIndex)
-    },
-    meta: { hasNextPage, isFetching }
+    meta: { 
+      hasNextPage: undefined,
+      isFetching: undefined 
+    }
   })
-
+  
   return (
     <section
       className='
@@ -56,7 +44,7 @@ export function CertificatesPanel({ certificates }: CertificatesPanelProps) {
         text-slate-800
       '
     >
-      <DataGrid data={data} />
+      <CertificateGrid table={table} />
     </section>
   )
 }
