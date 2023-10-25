@@ -1,15 +1,14 @@
 'use client'
-import { useState } from 'react'
 import {
   useReactTable,
   getCoreRowModel,
   getPaginationRowModel,
-} from "@tanstack/react-table"
+} from '@tanstack/react-table'
 
 import { CertificateGrid } from '@/components/ui/certificate-grid'
 import { Certificate } from '@/types/core'
 
-import { columns } from "./columns"
+import { columns } from './columns'
 
 
 interface CertificatesPanelProps {
@@ -36,14 +35,12 @@ export function CertificatesPanel({ certificates }: CertificatesPanelProps) {
   })
   
   return (
-    <section
-      className='
+    <section className='
         flex flex-col justify-center items-center gap-y-2 sm:gap-4
         my-4 mx-2 sm:mx-8
         w-11/12 sm:w-4/5
         text-slate-800
-      '
-    >
+      '>
       <CertificateGrid table={table} />
     </section>
   )

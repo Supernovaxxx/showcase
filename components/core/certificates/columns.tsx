@@ -1,24 +1,24 @@
 'use client'
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef } from '@tanstack/react-table'
 
-import { Certificate } from "@/types/core"
+import { Certificate } from '@/types/core'
 
 
 export const columns: ColumnDef<Certificate>[] = [
     {
-        accessorKey: "date",
-        header: "Date",
+        accessorKey: 'date',
+        header: 'Date',
     },
     {
-        accessorKey: "title",
-        header: "Title",
+        accessorKey: 'title',
+        header: 'Title',
     },
     {
-        accessorKey: "issuer",
-        header: "Issuer",
+        accessorKey: 'issuer',
+        header: 'Issuer',
     },
     {
-        accessorKey: "tags",
-        header: "Tags",
+        accessorKey: 'tags',
+        header: 'Tags',
     },
 ]
