@@ -19,15 +19,13 @@ interface ReferenceCardProps {
 export function ReferenceCard({ item }: ReferenceCardProps) {
 
     return (
-        <Card
-            className='
+        <Card className='
                 max-w-xs
                 break-words 
                 shadow-inner 
                 hover:shadow-md hover:drop-shadow-md hover:scale-105 
                 ease-in-out duration-200
-                '
-        >
+        '>
             <a className='hover:opacity-90' href={item.link} target='_blank'>
                 <CardHeader className='min-h-[9.125rem]'>
                     <CardTitle>{item.title}</CardTitle>

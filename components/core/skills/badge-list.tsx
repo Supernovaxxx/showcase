@@ -56,13 +56,10 @@ export function SkillBadge({ skill, toggleSkill, skillIsActive }: SkillBadgeProp
                             cursor-pointer
                             transition-all ease-in-out duration-100
                             hover:opacity-80 hover:scale-105
-                        '
-                    >
+                        '>
                         <Logo
                             name={skill as LogoName}
-                            className='
-                                w-8 h-8
-                            '
+                            className='w-8 h-8'
                         />
                     </Badge>
                 </TooltipTrigger>
