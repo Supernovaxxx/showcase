@@ -1,47 +1,70 @@
 'use client'
+import { useEffect, useState } from 'react'
 import {
-  useReactTable,
+  ColumnFiltersState,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
+  useReactTable
 } from '@tanstack/react-table'
 
+import { getCertificates, getSkillList } from '@/lib/data'
+import { useSkills } from '@/hooks/useSkills'
+import { SkillBadgesList } from '@/components/core/skills'
 import { CertificateGrid } from '@/components/ui/certificate-grid'
-import { Certificate } from '@/types/core'
 
 import { columns } from './columns'
 
 
-interface CertificatesPanelProps {
-  certificates: Certificate[]
-}
+export function CertificatesPanel() {
 
-export function CertificatesPanel({ certificates }: CertificatesPanelProps) {
+  let certificates = getCertificates()
+  const SKILL_LIST = getSkillList()
+  const { selectedSkills, toggleSkill, skillIsActive } = useSkills()
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
   const table = useReactTable({
     data: certificates,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    autoResetPageIndex: false,
+    getFilteredRowModel: getFilteredRowModel(),
     initialState: {
       pagination: {
         pageSize: 9
-      }
+      },
     },
-    meta: { 
+    state: {
+      columnFilters: columnFilters
+    },
+    onColumnFiltersChange: setColumnFilters,
+    meta: {
       hasNextPage: undefined,
-      isFetching: undefined 
-    }
+      isFetching: undefined
+    },
   })
-  
+  useEffect(() => {
+    table.getColumn('skills')?.setFilterValue(selectedSkills)
+  }, [selectedSkills])
+
   return (
-    <section className='
+    <>
+      <div className='flex flex-col justify-center items-center gap-1 m-1 sm:m-8 sm:w-3/4'>
+        <h2 className='text-xl font-bold text-slate-800'>
+          Filter by skills
+        </h2>
+        <div className='flex flex-wrap justify-start gap-2 sm:gap-2 m-2'>
+          <SkillBadgesList skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
+        </div>
+      </div>
+      <div className='
         flex flex-col justify-center items-center gap-y-2 sm:gap-4
         my-4 mx-2 sm:mx-8
         w-11/12 sm:w-4/5
         text-slate-800
       '>
-      <CertificateGrid table={table} />
-    </section>
+        <CertificateGrid table={table} />
+      </div>
+    </>
   )
 }

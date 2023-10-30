@@ -1,7 +1,7 @@
 'use client'
 import { ColumnDef } from '@tanstack/react-table'
 
-import { Certificate } from '@/types/core'
+import { Certificate, Skill } from '@/types/core'
 
 
 export const columns: ColumnDef<Certificate>[] = [
@@ -18,7 +18,18 @@ export const columns: ColumnDef<Certificate>[] = [
         header: 'Issuer',
     },
     {
-        accessorKey: 'tags',
-        header: 'Tags',
-    },
+        accessorKey: 'skills',
+        header: 'Skills',
+        cell: ({ row }) => {
+            const skills: string[] = row.getValue('skills')
+            return <div className='flex gap-1'>{skills.map((item, index) => <span key={index}>{item} </span>)}</div>
+        },
+        filterFn: (row, columnIds, selectedSkills) => {
+            return selectedSkills.length === 0
+                ? true
+                : row.original.skills.some(
+                    (skill: Skill) => selectedSkills.includes(skill)
+                )
+        },
+    }
 ]
