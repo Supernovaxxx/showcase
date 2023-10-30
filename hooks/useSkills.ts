@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Skill } from '@/types/core'
 
 
-export function useSkills() {
+export function useSkills(setFilteredSkills: (selectedSkills: Skill[]) => void) {
 
     const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
 
@@ -14,8 +14,14 @@ export function useSkills() {
             setSelectedSkills([...selectedSkills, skill])
         }
     }
+    
+    useEffect(() => {
+        if (typeof setFilteredSkills === 'function') {
+            setFilteredSkills(selectedSkills)
+        }
+    }, [selectedSkills])
 
-    function skillIsActive(skill: Skill):boolean {
+    function skillIsActive(skill: Skill): boolean {
         return selectedSkills.includes(skill)
     }
 
