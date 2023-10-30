@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from 'react'
 import {
   ColumnFiltersState,
   getCoreRowModel,
@@ -12,6 +11,7 @@ import { getCertificates, getSkillList } from '@/lib/data'
 import { useSkills } from '@/hooks/useSkills'
 import { SkillBadgesList } from '@/components/core/skills'
 import { CertificateGrid } from '@/components/ui/certificate-grid'
+import { Skill } from '@/types/core'
 
 import { columns } from './columns'
 
@@ -20,8 +20,11 @@ export function CertificatesPanel() {
 
   let certificates = getCertificates()
   const SKILL_LIST = getSkillList()
-  const { selectedSkills, toggleSkill, skillIsActive } = useSkills()
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
+  function setFilteredSkills(selectedSkills: Skill[]) {
+    table.getColumn('skills')?.setFilterValue(selectedSkills)
+  }
+  const { toggleSkill, skillIsActive } = useSkills(setFilteredSkills)
 
   const table = useReactTable({
     data: certificates,
@@ -34,18 +37,11 @@ export function CertificatesPanel() {
         pageSize: 9
       },
     },
-    state: {
-      columnFilters: columnFilters
-    },
-    onColumnFiltersChange: setColumnFilters,
     meta: {
       hasNextPage: undefined,
       isFetching: undefined
     },
   })
-  useEffect(() => {
-    table.getColumn('skills')?.setFilterValue(selectedSkills)
-  }, [selectedSkills])
 
   return (
     <>
