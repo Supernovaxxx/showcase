@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
     Form,
     FormControl,
@@ -16,7 +17,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
 
 
 const formSchema = z.object({
@@ -42,6 +42,7 @@ export function ContactForm() {
         defaultValues: {
             name: "",
             email: "",
+            message: "", 
             newsletter: undefined,
         },
     })
@@ -103,7 +104,10 @@ export function ContactForm() {
                     <FormField
                         control={form.control}
                         name='newsletter'
-                        rules={{ required: true }}
+                        rules={{ 
+                            required: true,
+                            validate: (value) => value === true || "Please agree to receive the newsletter via e-mail.",
+                        }}
                         render={({ field }) => (
                             <FormItem className="flex items-center justify-center gap-1">
                                 <FormControl>
