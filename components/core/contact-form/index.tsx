@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
 import { resolver, Schema } from './schema'
+import { SendContactForm } from './action'
 
 
 export default function ContactForm() {
@@ -30,8 +31,9 @@ export default function ContactForm() {
         },
     })
 
-    function onSubmit(values: Schema) {
-        console.log(values)
+    async function onSubmit(values: Schema) {
+        const returnedValues = await SendContactForm(values)
+        alert(returnedValues)
     }
 
     return (
