@@ -20,7 +20,7 @@ export function ReferencesSkeleton({ perPage }: { perPage: number }) {
 
 function SingleReferenceSkeleton() {
     return (
-        <Card className='max-w-sm animate-pulse rounded-md bg-slate-50'>
+        <Card className='max-w-sm animate-pulse rounded-md bg-secondary'>
             <CardHeader className='min-h-[9.125rem]'>
                 <Skeleton className='h-6 w-3/4 rounded' />
                 <Skeleton className='h-6 w-4/5 rounded' />

@@ -46,7 +46,7 @@ export function CertificatesPanel() {
   return (
     <>
       <div className='flex flex-col justify-center items-center gap-1 m-1 sm:m-8 sm:w-3/4'>
-        <h2 className='text-xl font-bold text-slate-800'>
+        <h2 className='text-xl font-bold text-foreground'>
           Filter by skills
         </h2>
         <div className='flex flex-wrap justify-start gap-2 sm:gap-2 m-2'>
@@ -57,7 +57,7 @@ export function CertificatesPanel() {
         flex flex-col justify-center items-center gap-y-2 sm:gap-4
         my-4 mx-2 sm:mx-8
         w-11/12 sm:w-4/5
-        text-slate-800
+        text-foreground
       '>
         <CertificateGrid table={table} />
       </div>
