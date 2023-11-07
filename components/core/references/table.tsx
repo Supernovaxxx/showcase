@@ -49,7 +49,7 @@ export function ReferencesTable() {
     <div className='flex flex-col justify-center items-center gap-2
           p-8 w-100
     '>
-      <h2 className='text-3xl font-bold text-slate-800'>
+      <h2 className='text-3xl font-bold text-foreground'>
         Learnlog table
       </h2>
       <div className='w-4/5'>
