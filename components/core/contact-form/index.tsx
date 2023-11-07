@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
     Form,
     FormControl,
@@ -13,20 +13,20 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
-import { formSchema, FormSchema } from "./schema"
+import { formSchema, FormSchema } from './schema'
 
 
 export default function ContactForm() {
     const form = useForm<FormSchema>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            email: "",
-            message: "",
+            name: '',
+            email: '',
+            message: '',
             newsletter: undefined,
         },
     })
@@ -37,10 +37,10 @@ export default function ContactForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 my-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-3 my-4'>
                 <FormField
                     control={form.control}
-                    name="name"
+                    name='name'
                     rules={{ required: true }}
                     render={({ field }) => (
                         <FormItem>
@@ -54,12 +54,12 @@ export default function ContactForm() {
                 />
                 <FormField
                     control={form.control}
-                    name="email"
+                    name='email'
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input placeholder="youremail@email.com" {...field} />
+                                <Input placeholder='youremail@email.com' {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -67,12 +67,12 @@ export default function ContactForm() {
                 />
                 <FormField
                     control={form.control}
-                    name="message"
+                    name='message'
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Message</FormLabel>
                             <FormControl>
-                                <Textarea {...field} className="resize-none" />
+                                <Textarea {...field} className='resize-none' />
                             </FormControl>
                             <FormDescription>
                                 Write me about anything!
@@ -86,10 +86,10 @@ export default function ContactForm() {
                     name='newsletter'
                     rules={{
                         required: true,
-                        validate: (value) => value === true || "Please agree to receive the newsletter via e-mail.",
+                        validate: (value) => value === true || 'Please agree to receive the newsletter via e-mail.',
                     }}
                     render={({ field }) => (
-                        <FormItem className="flex items-center justify-center gap-1">
+                        <FormItem className='flex items-center justify-center gap-1'>
                             <FormControl>
                                 <Checkbox
                                     checked={field.value}
@@ -103,7 +103,7 @@ export default function ContactForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button type='submit'>Submit</Button>
             </form>
         </Form>
     )
