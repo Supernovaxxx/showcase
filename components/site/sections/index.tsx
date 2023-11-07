@@ -1,3 +1,3 @@
 export { CertificationSection } from './certification'
-export { ContactForm } from './contact-form'
+export { ContactSection } from './contact'
 export { LearnlogSection } from './learnlog'

@@ -1,4 +1,4 @@
-import { CertificationSection, ContactForm, LearnlogSection } from '@/components/site/sections'
+import { CertificationSection, ContactSection, LearnlogSection } from '@/components/site/sections'
 import { ReferencesTable } from '@/components/core/references/table'
 
 
@@ -9,7 +9,7 @@ export default function Home() {
       <ReferencesTable />
       {/* <LearnlogSection /> */}
       <CertificationSection />
-      <ContactForm />
+      <ContactSection />
     </main>
   )
 }
