@@ -1,20 +1,20 @@
 'use client'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { type ThemeProviderProps } from 'next-themes/dist/types'
+import { ThemeProvider } from 'next-themes'
 
-interface ProvidersProps extends ThemeProviderProps {
-    children: React.ReactNode
-}
 
-export function Providers({ children, ...props }: ProvidersProps) {
+export function Providers({ children }: React.PropsWithChildren) {
     const queryClient = new QueryClient()
 
     return (
         <QueryClientProvider client={queryClient}>
-            <NextThemesProvider {...props}>
+            <ThemeProvider
+                attribute="data-theme"
+                enableSystem
+                disableTransitionOnChange
+            >
                 {children}
-            </NextThemesProvider>
+            </ThemeProvider>
         </QueryClientProvider>
     )
 }
