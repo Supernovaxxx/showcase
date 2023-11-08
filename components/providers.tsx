@@ -24,6 +24,7 @@ export function Providers({ children }: React.PropsWithChildren) {
             <ThemeProvider
                 attribute='data-theme'
                 enableSystem
+                defaultTheme='dark'
                 disableTransitionOnChange
             >
                 {children}
