@@ -8,16 +8,7 @@ import { Button } from "@/components/ui/button"
 
 
 export function ThemeToggler() {
-    const [mounted, setMounted] = React.useState(false)
     const { setTheme } = useTheme()
-
-    React.useEffect(() => {
-        setMounted(true)
-      }, [])
-    
-      if (!mounted) {
-        return null
-      }
 
     return (
         <div className='flex justify-end items-center gap-2 px-8 py-4'>
