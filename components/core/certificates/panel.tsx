@@ -11,10 +11,10 @@ import {
 import { getCertificates, getSkillList } from '@/lib/data'
 import { useSkills } from '@/hooks/useSkills'
 import { SkillBadgesList } from '@/components/core/skills'
-import { CertificateGrid } from '@/components/ui/certificate-grid'
 import { Certificate } from '@/types/core'
 
 import { columns } from './columns'
+import { CertificateGrid } from './grid'
 
 
 export function CertificatesPanel() {
