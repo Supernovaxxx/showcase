@@ -1,6 +1,5 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
@@ -17,12 +16,12 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
-import { formSchema, FormSchema } from './schema'
+import { resolver, Schema } from './schema'
 
 
 export default function ContactForm() {
-    const form = useForm<FormSchema>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<Schema>({
+        resolver: resolver,
         defaultValues: {
             name: '',
             email: '',
@@ -31,7 +30,7 @@ export default function ContactForm() {
         },
     })
 
-    function onSubmit(values: FormSchema) {
+    function onSubmit(values: Schema) {
         console.log(values)
     }
 

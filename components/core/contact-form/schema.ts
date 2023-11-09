@@ -1,6 +1,8 @@
 import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-export const formSchema = z.object({
+
+const schema = z.object({
     name: z.string().min(2, {
         message: 'Your name must have at least 2 characters.',
     }),
@@ -17,4 +19,6 @@ export const formSchema = z.object({
     newsletter: z.boolean()
 })
 
-export type FormSchema = z.infer<typeof formSchema>
+export type Schema = z.infer<typeof schema>
+
+export const resolver = zodResolver(schema)
