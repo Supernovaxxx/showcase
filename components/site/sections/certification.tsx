@@ -6,7 +6,7 @@ import { filterCertificatesBySkills, getCertificates, getSkillList } from '@/lib
 
 
 export function CertificationSection() {
-    let certificates = getCertificates()
+    const certificates = getCertificates()
     const SKILL_LIST = getSkillList()
     const { selectedSkills, toggleSkill, skillIsActive } = useSkills()
 
