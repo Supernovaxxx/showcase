@@ -1,11 +1,9 @@
-import certificatesData from '@/data/certificates.json'
+import { certification } from 'contentlayer/generated'
 import { Certificate } from '@/types/core'
 
 
 export function getCertificates() {
-    const certificates: Certificate[] = certificatesData
-
-    return certificates
+    return certification.data
 }
 
 export function getSkillList() {
@@ -13,7 +11,7 @@ export function getSkillList() {
 
     return [...new Set(
         certificates
-            .map((item) => item.skills)
+            .map((item: Certificate) => item.skills)
             .flat()
     )]
 }

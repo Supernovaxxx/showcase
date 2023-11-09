@@ -30,9 +30,9 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
           {certificate.title}
         </CardTitle>
         <CardDescription>
-          {certificate.issuer.title}
+          {certificate.issuer}
           {' '}
-          <Logo name={certificate.issuer.title as LogoName}
+          <Logo name={certificate.issuer as LogoName}
             className='
                 inline
                 w-3 h-3 sm:w-4 sm:h-4 
