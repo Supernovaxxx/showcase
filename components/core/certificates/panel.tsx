@@ -1,6 +1,7 @@
 'use client'
+import { useEffect } from 'react'
+
 import {
-  ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -21,11 +22,6 @@ export function CertificatesPanel() {
   let certificates = getCertificates()
   const SKILL_LIST = getSkillList()
 
-  function setFilteredSkills(selectedSkills: Skill[]) {
-    table.getColumn('skills')?.setFilterValue(selectedSkills)
-  }
-  const { toggleSkill, skillIsActive } = useSkills(setFilteredSkills)
-
   const table = useReactTable({
     data: certificates,
     columns,
@@ -42,6 +38,19 @@ export function CertificatesPanel() {
       isFetching: undefined
     },
   })
+
+  function setFilteredSkills(selectedSkills: Skill[]) {
+    table.getColumn('skills')?.setFilterValue(selectedSkills)
+  }
+  const {
+    selectedSkills,
+    toggleSkill,
+    skillIsActive
+  } = useSkills()
+
+  useEffect(() => {
+    setFilteredSkills(selectedSkills)
+  }, [selectedSkills])
 
   return (
     <>
