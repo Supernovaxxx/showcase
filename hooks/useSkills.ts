@@ -15,7 +15,7 @@ export function useSkills() {
         }
     }
 
-    function skillIsActive(skill: Skill):boolean {
+    function skillIsActive(skill: Skill): boolean {
         return selectedSkills.includes(skill)
     }
 

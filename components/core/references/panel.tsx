@@ -45,19 +45,8 @@ export function ReferencesPanel() {
     }
 
     return (
-        <section
-            className='
-                    flex flex-col items-center 
-                    w-11/12 sm:w-4/5
-                '
-        >
-            <div
-                className='
-                    flex justify-end gap-2 
-                    w-11/12 sm:w-3/5
-                    mt-2
-                    '
-            >
+        <section className='flex flex-col items-center w-11/12 sm:w-4/5'>
+            <div className='flex justify-end gap-2 w-11/12 sm:w-3/5 mt-2'>
                 <Input placeholder='Search' className='w-2/5 sm:w-1/3' onChange={(e) => handleInputChange(e)} />
                 <ChangePageButton
                     changePage={moveToPreviousPage}
@@ -75,19 +64,19 @@ export function ReferencesPanel() {
                     <ChevronRight className='h-4 w-4' />
                 </ChangePageButton>
             </div>
-            <div
-                className='
+            <div className='
                     grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4
                     my-4 mx-2 sm:mx-8
                     w-11/12 sm:w-4/5 lg:w-11/12
                     text-slate-800
-                    '
-            >
+            '>
                 {
                     isLoading || isFetching
                         ? <ReferencesSkeleton perPage={perPage} />
                         : isError
-                            ? <p className='w-full text-lg col-span-full text-center pt-8'>An error occured. Please try again.</p>
+                            ? <p className='w-full text-lg col-span-full text-center pt-8'>
+                                An error occured. Please try again.
+                            </p>
                             :
                             pageData?.length
                                 ? pageData.map((item, index) => {
