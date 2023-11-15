@@ -1,5 +1,7 @@
 'use client'
 
+import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import {
     Table as TanstackTable,
 } from '@tanstack/react-table'
@@ -18,6 +20,7 @@ interface CertificateGridProps<TData, TValue> {
 export function CertificateGrid<TData, TValue>({
     table,
 }: CertificateGridProps<TData, TValue>) {
+    const constraintsRef = useRef(null)
 
     const { hasNextPage, isFetching } = table.options.meta!
 
@@ -46,20 +49,22 @@ export function CertificateGrid<TData, TValue>({
                         : <ChevronRight className='h-4 w-5' />}
                 </Button>
             </div>
-            <div className='
+            <motion.div className='
                 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4
                 w-full
-            '>
+                '
+                ref={constraintsRef}
+            >
                 {
                     table.getRowModel().rows?.length
                         ? (table.getRowModel().rows.map((row) => (
-                            <CertificateCard certificate={row.original as Certificate} key={row.id} />
+                                <CertificateCard certificate={row.original as Certificate} key={row.id} dragConstraints={constraintsRef} />
                         )))
                         : <div className='h-24 text-center'>
                             No results.
                         </div>
                 }
-            </div>
+            </motion.div>
         </>
     )
 }
