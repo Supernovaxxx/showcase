@@ -8,7 +8,7 @@ import { Certificate } from '@/types/core'
 import { ChevronLeft, ChevronRight, Loading } from '@/components/site/icons'
 import { CertificateCard } from '@/components/core/certificates'
 
-import { Button } from './button'
+import { Button } from '@/components/ui/button'
 
 
 interface CertificateGridProps<TData, TValue> {
