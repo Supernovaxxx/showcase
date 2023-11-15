@@ -49,8 +49,8 @@ export function CertificatesPanel() {
         <h2 className='text-xl font-bold text-foreground'>
           Filter by skills
         </h2>
-        <div className='flex flex-wrap justify-start gap-2 sm:gap-2 m-2'>
-          <SkillBadgesList skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
+        <div className='flex flex-wrap justify-start w-full overflow-x-hidden'>
+            <SkillBadgesList skills={SKILL_LIST} toggleSkill={toggleSkill} skillIsActive={skillIsActive} />
         </div>
       </div>
       <div className='
