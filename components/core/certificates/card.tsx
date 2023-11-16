@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { MutableRefObject, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 import {
@@ -17,9 +17,10 @@ import { Certificate } from '@/types/core'
 
 interface CertificateCardProps {
   certificate: Certificate
+  dragConstraints: MutableRefObject<null>
 }
 
-export function CertificateCard({ certificate }: CertificateCardProps) {
+export function CertificateCard({ certificate, dragConstraints }: CertificateCardProps) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -30,7 +31,13 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
   return (
     <motion.div
       ref={ref}
-      style={{ scale: scaleProgress, opacity: scrollYProgress }}
+      style={{ opacity: scaleProgress }}
+      drag
+      dragConstraints={dragConstraints}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ boxShadow: "0px 0px 15px rgba(0,0,0,0.2)" }}
+      dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+      className='h-full'
     >
       <Card className='flex flex-col justify-between h-full'>
         <CardHeader className='min-h-[9.25rem]'>
