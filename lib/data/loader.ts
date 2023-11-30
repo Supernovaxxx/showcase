@@ -1,8 +1,13 @@
-import { allCertificates,  } from '@/.contentlayer/generated'
+import { allCertificates, allExperiences } from '@/.contentlayer/generated'
 
 export function getCertificates() {
     const certificates = allCertificates
     return certificates
+}
+
+export function getExperiences() {
+    const experiences = allExperiences
+    return experiences
 }
 
 export function getSkillList() {
