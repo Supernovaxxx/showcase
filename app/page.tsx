@@ -1,4 +1,4 @@
-import { CertificationSection, ContactSection, LearnlogSection } from '@/components/site/sections'
+import { CertificationSection, ContactSection, CurriculumSection, LearnlogSection } from '@/components/site/sections'
 import { ReferencesTable } from '@/components/core/references/table'
 import { ThemeToggler } from '@/components/site/theme-toggler'
 import { ScrollProgress } from '@/components/site/scroll-progress'
@@ -10,9 +10,10 @@ export default function Home() {
     <main>
       <ScrollProgress />
       <ThemeToggler />
-      <ReferencesTable />
+      <CurriculumSection />
       {/* <LearnlogSection /> */}
       <CertificationSection />
+      <ReferencesTable />
       <ContactSection />
     </main>
   )
