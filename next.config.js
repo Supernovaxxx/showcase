@@ -14,7 +14,11 @@ const nextConfig = {
         ]
     },
     reactStrictMode: true,
-    swcMinify: true
+    swcMinify: true,
+    experimental: {
+        typedRoutes: true,
+        serverActions: true,
+    },
 }
 
 module.exports = withContentlayer(nextConfig)
