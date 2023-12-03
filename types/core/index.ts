@@ -1,14 +1,5 @@
 import { Raindrop } from '@/types/data/raindrops'
-
-
-export interface Certificate {
-    title: string,
-    date: string, // TODO: define date type (mm/dd/aaaa | mm/aaaa)
-    skills: Skill[],
-    issuer: string,
-    imageUrl: string,
-    certificateUrl: string
-}
+export { type Certificate } from 'contentlayer/generated'
 
 export type Reference = Raindrop
 

@@ -1,11 +1,13 @@
-import certificatesData from '@/data/certificates.json'
-import { Certificate } from '@/types/core'
-
+import { allCertificates, allExperiences } from '@/.contentlayer/generated'
 
 export function getCertificates() {
-    const certificates: Certificate[] = certificatesData
-
+    const certificates = allCertificates
     return certificates
+}
+
+export function getExperiences() {
+    const experiences = allExperiences
+    return experiences
 }
 
 export function getSkillList() {
