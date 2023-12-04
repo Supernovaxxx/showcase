@@ -4,6 +4,7 @@ date: '2022-11-30'
 skills:
   - NextJS
 issuer: LinkedIn
+courseRelease: 2022
 imageUrl: >-
   https://media.licdn.com/dms/image/C4D1FAQF5vMavWnqlSA/feedshare-document-cover-images_1280/0/1669838551108?e=1696017600&v=beta&t=PXaVtchzXSv5Hk3PBOjbHEFVBNIlLVFZpTOYZOy7TiM
 certificateUrl: >-

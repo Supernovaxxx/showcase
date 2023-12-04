@@ -4,6 +4,7 @@ date: '2022-08-09'
 skills:
   - Django
 issuer: LinkedIn
+courseRelease: 2022
 imageUrl: >-
   https://media.licdn.com/dms/image/C4D1FAQHFjzJKYmkiiA/feedshare-document-cover-images_1280/0/1660044854318?e=1696374000&v=beta&t=_C-nUGTozlv8YzqSDvu9bSqDcES0zmpFlFyiBTWNC7E
 certificateUrl: >-

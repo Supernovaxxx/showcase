@@ -4,6 +4,7 @@ date: '2022-11-21'
 skills:
   - CSS
 issuer: LinkedIn
+courseRelease: 2022
 imageUrl: >-
   https://media.licdn.com/dms/image/C4D1FAQHZkRe1uvsD9w/feedshare-document-cover-images_1280/0/1669028934671?e=1696017600&v=beta&t=mh46wfQUq5kqyjGZATszhKPPzNttJkmRM_LwQFOEPBU
 certificateUrl: >-

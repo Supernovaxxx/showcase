@@ -4,6 +4,7 @@ date: '2022-09-10'
 skills:
   - Docker
 issuer: LinkedIn
+courseRelease: 2019
 imageUrl: >-
   https://media.licdn.com/dms/image/D4D1FAQFbCKkTkT57DQ/feedshare-document-cover-images_1280/0/1662830501370?e=1696374000&v=beta&t=H6wZOUupx-1gd_LDYPvTZmBpYGtK98ZqYst1KHVmVa4
 certificateUrl: >-

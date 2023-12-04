@@ -4,6 +4,7 @@ date: '2022-11-19'
 skills:
   - NPM
 issuer: LinkedIn
+courseRelease: 2018
 imageUrl: >-
   https://media.licdn.com/dms/image/C4D1FAQEHB9hEKwlokA/feedshare-document-cover-images_1280/0/1668840085047?e=1696017600&v=beta&t=oegNVsd6i3Ogp3ymdW7OXG69eMGtYDxP_4jgCjhMP4c
 certificateUrl: >-

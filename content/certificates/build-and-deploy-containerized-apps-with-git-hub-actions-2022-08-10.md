@@ -5,6 +5,7 @@ skills:
   - Docker
   - GitHub
 issuer: LinkedIn
+courseRelease: 2021
 imageUrl: >-
   https://media.licdn.com/dms/image/C4D1FAQHEmjKho2LcSw/feedshare-document-cover-images_1280/0/1660103634815?e=1696377600&v=beta&t=80VzpBA8XVdYI_6FvLbJRavZw7jJcQKLBl-l1Gh6u-s
 certificateUrl: >-
