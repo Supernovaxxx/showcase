@@ -9,6 +9,7 @@ export const Certificate = defineDocumentType(() => ({
         date: { type: 'string', required: true },
         skills: { type: 'list', of: {type:'string'}, required: true },
         issuer: { type: 'string', required: true },
+        courseRelease: { type: 'number', required: false },
         imageUrl: { type: 'string', required: false },
         certificateUrl: { type: 'string', required: false }
     },
